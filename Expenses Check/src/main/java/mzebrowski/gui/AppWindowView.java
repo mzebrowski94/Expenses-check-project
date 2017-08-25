@@ -18,16 +18,24 @@ public class AppWindowView {
 	RightPanelView rightPanelView;
 
 	public AppWindowView() {
+		boolean isNibus = false;
+		
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
 		            UIManager.setLookAndFeel(info.getClassName());
+		            isNibus = true;
 		            break;
 		        }
 		    }
+		    if(!isNibus)
+		    {
+		    	UIManager.setLookAndFeel(
+			            UIManager.getCrossPlatformLookAndFeelClassName());
+		    }
 		} catch (Exception e) {
-		    // If Nimbus is not available, you can set the GUI to another look and feel.
-		}
+			
+		} 
 		
 		frame = new JFrame("Expenses check");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
