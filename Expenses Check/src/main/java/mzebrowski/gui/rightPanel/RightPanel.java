@@ -7,28 +7,23 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class RightPanelView extends JPanel {
+public class RightPanel extends JPanel {
 
 	UserAvatarPanel userAvatarPanel;
 	UserInformationPanel userInformationPanel;
-	AddExpensePanel addExpensePanel;
+	ExpenseAddPanel addExpensePanel;
 	
-	public RightPanelView() {
-		super();
+	public RightPanel(UserAvatarPanel userAvatarPanel,UserInformationPanel userInformationPanel,ExpenseAddPanel addExpensePanel) {
 		BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(boxLayout);
 
-		// Add user avatar Panel
-		userAvatarPanel = new UserAvatarPanel();
+		this.userAvatarPanel = userAvatarPanel;
 		add(userAvatarPanel);
-
-		// Add user informations Panel
-		userInformationPanel = new UserInformationPanel();
-		userInformationPanel.setBorder(new EmptyBorder(15,0,15, 0));
+		
+		this.userInformationPanel = userInformationPanel;
 		add(userInformationPanel);
 		
-		//Add add explen panel
-		addExpensePanel = new AddExpensePanel();
+		this.addExpensePanel = addExpensePanel;
 		add(addExpensePanel);
 		
 		setBorder(BorderFactory.createLoweredBevelBorder());

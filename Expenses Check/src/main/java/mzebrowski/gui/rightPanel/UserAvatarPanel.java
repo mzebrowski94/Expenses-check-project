@@ -14,7 +14,6 @@ public class UserAvatarPanel extends JPanel {
 	private String userLetter;
 	
 	public UserAvatarPanel() {
-		super();
 		setPreferredSize(new Dimension(size, size));
 		// try {
 		// image = ImageIO.read(new File("template.png"));

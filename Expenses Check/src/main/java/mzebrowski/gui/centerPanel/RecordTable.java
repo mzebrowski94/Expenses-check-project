@@ -1,6 +1,7 @@
 package mzebrowski.gui.centerPanel;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Date;
 
 import javax.swing.Icon;
@@ -11,9 +12,12 @@ import mzebrowski.database.domain.PurchaseType;
 import mzebrowski.gui.centerPanel.IconShape.IconType;
 
 @SuppressWarnings("serial")
-public class RecordTableView extends JTable {
+public class RecordTable extends JTable {
 
-	public RecordTableView() {
+	public RecordTable(Dimension preferedSize) {
+		
+		this.setPreferredSize(preferedSize);
+		
 		// headers for the table
 		String[] columns = new String[] { "Col", "UserName", "Date", "Type", "Amount" };
 

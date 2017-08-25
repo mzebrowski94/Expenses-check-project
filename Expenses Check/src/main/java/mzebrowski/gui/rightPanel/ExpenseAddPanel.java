@@ -11,42 +11,37 @@ import javax.swing.border.EtchedBorder;
 import mzebrowski.gui.centerPanel.ComboBoxFilter;
 
 @SuppressWarnings("serial")
-public class AddExpensePanel extends JPanel {
+public class ExpenseAddPanel extends JPanel {
 
-	
-	private Border border;
 	ComboBoxFilter userComboBox, typeComboBox, dateComboBox;
 	AmountField amountField;
 	JButton addButon;
 	
-	public AddExpensePanel() {
+	public ExpenseAddPanel(ComboBoxFilter userComboBox, ComboBoxFilter typeComboBox, ComboBoxFilter dateComboBox, AmountField amountField, JButton addButon) {
 
-		border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 		setBorder(border);
 		BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(boxLayout);
-//		GridLayout gridLayout = new GridLayout(5, 0);
-//		setLayout(gridLayout);
 
-		userComboBox = new ComboBoxFilter("User: ");
+		this.userComboBox = userComboBox;
 		userComboBox.setBorder(border);
-
-		typeComboBox = new ComboBoxFilter("Purchase type: ");
-		typeComboBox.setBorder(border);
-
-		dateComboBox = new ComboBoxFilter("Date: ");
-		dateComboBox.setBorder(border);
-		
-		amountField = new AmountField();
-		
-		addButon = new JButton("Add");
-		addButon.setToolTipText("Add expense");
-		
 		add(userComboBox);
+		
+		this.typeComboBox = typeComboBox;
+		typeComboBox.setBorder(border);
 		add(typeComboBox);
+		
+		this.dateComboBox = dateComboBox;
+		dateComboBox.setBorder(border);
 		add(dateComboBox);
+		
+		this.amountField = amountField;
 		add(amountField);
+		
+		this.addButon = addButon;
+		addButon.setToolTipText("Add expense");
 		add(addButon);
-
+		
 	}
 }
