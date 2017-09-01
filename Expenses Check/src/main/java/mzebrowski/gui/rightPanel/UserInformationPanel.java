@@ -6,6 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
@@ -16,7 +17,8 @@ public class UserInformationPanel extends JPanel {
 
 		GridLayout gridLayout = new GridLayout(3, 0, 10, 0);
 		setLayout(gridLayout);
-
+		
+		
 		this.nameLabel = nameLabel;
 		nameLabel.setBorder(BorderFactory.createTitledBorder("Name: "));
 		add(nameLabel);
@@ -29,6 +31,6 @@ public class UserInformationPanel extends JPanel {
 		lastUpdate.setBorder(BorderFactory.createTitledBorder("Last updated: "));
 		add(lastUpdate);
 		
-		this.setBorder(new EmptyBorder(15,0,15, 0));
+		this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 	}
 }

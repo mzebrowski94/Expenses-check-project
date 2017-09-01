@@ -1,23 +1,8 @@
 package mzebrowski.database.DAOs;
 
-import java.util.Date;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-
-import mzebrowski.database.domain.Expense;
-import mzebrowski.database.domain.PurchaseType;
-import mzebrowski.database.domain.User;
 
 public class DatabaseAccessObject {
-
-	public static void main(String[] args) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ec_db_configuration");
-		//^ s³u¿y do wykonywania zapytañ z baz¹ danych
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
+	
 //		User user = new User();
 //		user.setUserName("Marta");
 //		user.setPassword("password");
@@ -62,10 +47,6 @@ public class DatabaseAccessObject {
 		//ser user3 = query.getSingleResult();		
 		//query.getResultList();
 		//System.out.println(user3.getUserName() + user3.getPassword());
-		
-		
-		entityManager.close();
-		entityManagerFactory.close();
-	}
+	
 
 }

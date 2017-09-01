@@ -2,6 +2,8 @@ package mzebrowski.database.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,6 +23,10 @@ public class Expense {
 	@Column(name = "name", length = 20)
 	private String name;
 
+	@Column
+	@Enumerated(EnumType.ORDINAL)
+    private E_PurchaseType purchaseType;
+	
 	@Column(name = "amount", nullable = false, precision = 4, scale = 2)
 	private double amount;
 
@@ -46,6 +52,14 @@ public class Expense {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public E_PurchaseType getPurchaseType() {
+		return purchaseType;
+	}
+
+	public void setPurchaseType(E_PurchaseType purchaseType) {
+		this.purchaseType = purchaseType;
 	}
 
 	public double getAmount() {

@@ -1,24 +1,25 @@
 package mzebrowski.gui.rightPanel;
 
 
+import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class RightPanel extends JPanel {
 
-	UserAvatarPanel userAvatarPanel;
+	UserLoginPanel userLoginPanel;
 	UserInformationPanel userInformationPanel;
 	ExpenseAddPanel addExpensePanel;
 	
-	public RightPanel(UserAvatarPanel userAvatarPanel,UserInformationPanel userInformationPanel,ExpenseAddPanel addExpensePanel) {
+	public RightPanel(UserLoginPanel userLoginPanel,UserInformationPanel userInformationPanel,ExpenseAddPanel addExpensePanel) {
 		BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(boxLayout);
-
-		this.userAvatarPanel = userAvatarPanel;
-		add(userAvatarPanel);
+		
+		this.userLoginPanel = userLoginPanel;
+		add(userLoginPanel);
 		
 		this.userInformationPanel = userInformationPanel;
 		add(userInformationPanel);
@@ -28,4 +29,18 @@ public class RightPanel extends JPanel {
 		
 		setBorder(BorderFactory.createLoweredBevelBorder());
 	}
+
+	public UserLoginPanel getUserAvatarPanel() {
+		return userLoginPanel;
+	}
+
+	public UserInformationPanel getUserInformationPanel() {
+		return userInformationPanel;
+	}
+
+	public ExpenseAddPanel getAddExpensePanel() {
+		return addExpensePanel;
+	}
+	
+	
 }

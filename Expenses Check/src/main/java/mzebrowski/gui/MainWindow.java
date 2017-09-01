@@ -1,39 +1,67 @@
 package mzebrowski.gui;
 
-import javax.swing.BoxLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import mzebrowski.gui.centerPanel.CenterPanel;
-import mzebrowski.gui.menuBar.MenuBar;
+import mzebrowski.gui.menuBar.MenuToolBar;
 import mzebrowski.gui.rightPanel.RightPanel;
 
 public class MainWindow extends JFrame {
 
-	MenuBar menuBar;
-	CenterPanel centerPanelView;
-	RightPanel rightPanelView;
+	MenuToolBar menuToolBar;
+	CenterPanel centerPanel;
+	RightPanel rightPanel;
 
-	public MainWindow(MenuBar menuBar, CenterPanel centerPanel, RightPanel rightPanelView) {
+	public MainWindow(MenuToolBar menuToolBar, CenterPanel centerPanel, RightPanel rightPanelView) {
 		
 		this.setTitle("Expenses Check");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
 		this.setSize(1000, 600);
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.X_AXIS));
+		
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+		
+		
 		this.setLocationRelativeTo(null);
 		
-		this.menuBar = menuBar;
-		this.setJMenuBar(menuBar);
+		this.menuToolBar = menuToolBar;
+		this.setJMenuBar(menuToolBar);
 		
-		this.centerPanelView = centerPanel;
-		this.add(centerPanel);
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.gridx=0;
+		constraints.gridy=0;
+		constraints.weightx=0.9;
+		constraints.weighty=0.9;
+		this.centerPanel = centerPanel;
+		this.add(centerPanel, constraints);
 		
-		this.rightPanelView = rightPanelView;
-		this.add(rightPanelView);
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.gridx=1;
+		constraints.gridy=0;
+		constraints.weightx=0.1;
+		constraints.weighty=0.1;
+		this.rightPanel = rightPanelView;
+		this.add(rightPanelView, constraints);
 	
 		this.setVisible(true);
 	}
+
+	public MenuToolBar getMenuToolBar() {
+		return menuToolBar;
+	}
+
+	public CenterPanel getCenterPanel() {
+		return centerPanel;
+	}
+
+	public RightPanel getRightPanel() {
+		return rightPanel;
+	}
+	
+	
 }

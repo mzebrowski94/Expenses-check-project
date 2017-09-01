@@ -1,36 +1,31 @@
 package mzebrowski.gui.centerPanel;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.Icon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import mzebrowski.database.domain.PurchaseType;
-import mzebrowski.gui.centerPanel.IconShape.IconType;
+import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.Expense;
 
 @SuppressWarnings("serial")
 public class RecordTable extends JTable {
 
+	private String[] columnNames;
+	private Class[] columnClasses;
+	private DefaultTableModel model;
+
 	public RecordTable(Dimension preferedSize) {
-		
 		this.setPreferredSize(preferedSize);
-		
 		// headers for the table
-		String[] columns = new String[] { "Col", "UserName", "Date", "Type", "Amount" };
+		columnNames = new String[] { "UserName", "Date", "Type", "Name", "Amount" };
+		columnClasses = new Class[] { String.class, Date.class, E_PurchaseType.class, String.class, Double.class };
 
-		// actual data for the table in a 2d array
-		Object[][] data = new Object[][] { { new IconShape(Color.RED,25,IconType.RECT), "John", new Date(), PurchaseType.FOOD, 31.20 }, 
-			{ new IconShape(Color.GREEN,25,IconType.RECT), "Max", new Date(), PurchaseType.ITEM, 10.30 },
-			{ new IconShape(Color.GREEN,25,IconType.RECT), "Mathew", new Date(), PurchaseType.OTHER, 15 } };
-
-		final Class[] columnClass = new Class[] { Icon.class, String.class, Date.class, PurchaseType.class,
-				Double.class };
-
-		// create table model with data
-		DefaultTableModel model = new DefaultTableModel(data, columns) {
+		// // create table model
+		model = new DefaultTableModel() {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -38,11 +33,23 @@ public class RecordTable extends JTable {
 
 			@Override
 			public Class<?> getColumnClass(int columnIndex) {
-				return columnClass[columnIndex];
+				return columnClasses[columnIndex];
 			}
 		};
 
-		setModel(model);
+		this.setModel(model);
+	}
+
+	public void updateRecordTableData(ArrayList<Expense> arrayList) {
+
+		Object[][] data = new Object[arrayList.size()][columnNames.length];
+		for (int i = 0; i < arrayList.size(); i++) {
+			Expense expense = arrayList.get(i);
+			data[i] = new Object[] { expense.getUserId().getUserName(), expense.getDate(), expense.getPurchaseType(),
+					expense.getName(), expense.getAmount() };
+		}
+
+		model.setDataVector(data, columnNames);
 	}
 
 }

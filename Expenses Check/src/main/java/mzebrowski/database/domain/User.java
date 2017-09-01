@@ -36,12 +36,6 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "last_update")
 	private java.util.Date lastUpdate;
-
-	@Column(table = "last_purchase", name = "Last_purchase_type")
-	private PurchaseType lastPusrchaseType;
-
-	@Column(table = "last_purchase", name = "last_purchase_description", length = 20)
-	private String lastPurchaseDescription;
 	
 	@OneToMany(mappedBy = "userId")
 	private List<Expense> expenses;	
@@ -62,14 +56,6 @@ public class User {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public PurchaseType getLastPusrchaseType() {
-		return lastPusrchaseType;
-	}
-
-	public void setLastPusrchaseType(PurchaseType lastPusrchaseType) {
-		this.lastPusrchaseType = lastPusrchaseType;
-	}
-
 	public List<Expense> getExpenses() {
 		return expenses;
 	}
@@ -78,24 +64,8 @@ public class User {
 		this.expenses = expenses;
 	}
 
-	public String getLastPurchaseDescription() {
-		return lastPurchaseDescription;
-	}
- 
-	public void setLastPurchaseDescription(String lastPurchaseDescription) {
-		this.lastPurchaseDescription = lastPurchaseDescription;
-	}
-
 	public int getIdUser() {
 		return idUser;
-	}
-
-	public PurchaseType getLastPurchaseType() {
-		return lastPusrchaseType;
-	}
-
-	public void setLastPurchaseType(PurchaseType lastPurchaseType) {
-		this.lastPusrchaseType = lastPurchaseType;
 	}
 
 	public void setIdUser(int idUser) {
@@ -118,14 +88,6 @@ public class User {
 		this.password = password;
 	}
 
-	public double getAccount_balance() {
-		return accountBalance;
-	}
-
-	public void setAccount_balance(double account_balance) {
-		this.accountBalance = account_balance;
-	}
-
 	public java.util.Date getData() {
 		return lastUpdate;
 	}
@@ -134,4 +96,9 @@ public class User {
 		this.lastUpdate = data;
 	}
 
+	@Override
+	public String toString()
+	{
+		return userName;
+	}
 }
