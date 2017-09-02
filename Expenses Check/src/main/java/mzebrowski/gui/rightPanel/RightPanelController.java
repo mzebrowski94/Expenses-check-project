@@ -9,54 +9,56 @@ import javax.swing.JOptionPane;
 import mzebrowski.controller.ControllerElement;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.database.services.ServiceManager;
+import mzebrowski.gui.rightPanel.expenseAddPanel.ExpenseAddPanelController;
+import mzebrowski.gui.rightPanel.userInformationPanel.UserInformationPanelController;
+import mzebrowski.gui.rightPanel.userLoginPanel.UserLoginPanelController;
 
 public class RightPanelController implements ActionListener, ControllerElement {
 
 	ServiceManager serviceManager;
 	RightPanel rightPanel;
-	UserLoginPanel userLoginPanel;
-	UserInformationPanel userInformationPanel;
-	ExpenseAddPanel addExpensePanel;
+	UserLoginPanelController userLoginPanelController;
+	UserInformationPanelController userInformationPanelController;
+	ExpenseAddPanelController expenseAddPanelController;
 
-	public RightPanelController(ServiceManager serviceManager, RightPanel rightPanel) {
+	public RightPanelController(ServiceManager serviceManager, RightPanel rightPanel,
+			UserLoginPanelController userLoginPanelController,
+			UserInformationPanelController userInformationPanelController,
+			ExpenseAddPanelController expenseAddPanelController) {
 		this.serviceManager = serviceManager;
 		this.rightPanel = rightPanel;
-		this.userLoginPanel = rightPanel.getUserAvatarPanel();
-		this.userInformationPanel = rightPanel.getUserInformationPanel();
-		this.addExpensePanel = rightPanel.getAddExpensePanel();
+		this.userLoginPanelController = userLoginPanelController;
+		this.userInformationPanelController = userInformationPanelController;
+		this.expenseAddPanelController = expenseAddPanelController;
+	}
+
+	public void initListeners(ActionListener actionListener) {
+		userLoginPanelController.initListeners(this);
+		userInformationPanelController.initListeners(this);
+		expenseAddPanelController.initListeners(this);
 	}
 
 	public void loadData() {
-		addExpensePanel.loadData((ArrayList<User>) serviceManager.getAllUsers());
+		expenseAddPanelController.loadData();
 	}
 
 	public void actionPerformed(ActionEvent event) {
 		if (event.getActionCommand() == E_RightPanelActions.LOGIN.actionName()) {
-			proceedLogin();	
+			proceedLogin();
 		}
-		
-	}
-
-	public void initListeners() {
-		userLoginPanel.initActionsAndListeners(this);
-	}
-
-	private void proceedLogin()
-	{
-		String password = userLoginPanel.getInsertedPassword();
-		String login = userLoginPanel.getInsertedLogin();
-		if(password.equals("") || login.equals(""))
-			JOptionPane.showMessageDialog(null, "Empty login or password field.\nTry again.", "Empty login or password field.", JOptionPane.ERROR_MESSAGE);
-		else
+		else if(event.getActionCommand() == E_RightPanelActions.LOGOUT.actionName())
 		{
-			if(serviceManager.loginAuthorization(login,password))
-				{
-				addExpensePanel.setAddingEnabled(true);
-				//JOptionPane.showMessageDialog(null, "OK");
-				}
-			else
-				JOptionPane.showMessageDialog(null, "Incorrect login or password.\nTry again.", "Authorization error.", JOptionPane.ERROR_MESSAGE);
+			 proceedLogout();
 		}
-			
+	}
+
+	public void proceedLogin() {
+		if (userLoginPanelController.proceedLogin())
+			expenseAddPanelController.setAddingEnabled(true);
+	}
+
+	public void proceedLogout() {
+		userLoginPanelController.proceedLogout();
+		expenseAddPanelController.setAddingEnabled(false);
 	}
 }

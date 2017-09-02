@@ -29,12 +29,12 @@ public class Application {
 		
 		//Presentation - Controller Layer
 		appController = new AppControllerFactory().build(mainWindow, serviceManager);
-		appController.initListeners();
+		appController.initListeners(null);
 		
 	}
 	
 	public void loadData()
 	{
-		appController.loadDataToView();
+		appController.loadData();
 	}
 }

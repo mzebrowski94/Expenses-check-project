@@ -1,4 +1,4 @@
-package mzebrowski.gui.rightPanel;
+package mzebrowski.gui.rightPanel.userLoginPanel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,53 +15,54 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
 import mzebrowski.gui.GuiElement;
+import mzebrowski.gui.rightPanel.E_RightPanelActions;
+import mzebrowski.gui.rightPanel.ValueField;
 
 @SuppressWarnings("serial")
 public class UserLoginPanel extends JPanel implements GuiElement {
 
 	ValueField loginField, passwordField;
+	JButton loginButton, logoutButton;
 	JLabel userIconLabel;
 	ImageIcon userIcon;
-	JButton loginButton, logoutButton;
-	
-	public UserLoginPanel(ValueField loginField, ValueField passwordField, ImageIcon userIcon, JButton loginButton, JButton logoutButton) {		
+
+	public UserLoginPanel(ValueField loginField, ValueField passwordField, ImageIcon userIcon, JButton loginButton,
+			JButton logoutButton) {
 		this.userIcon = userIcon;
-		this.loginButton = loginButton;	
+		this.loginButton = loginButton;
 		this.logoutButton = logoutButton;
 		this.loginField = loginField;
 		this.passwordField = passwordField;
 	}
 
-	
-	private GridBagConstraints createConstraints(int fillType,int gridx, int gridy,double weightx, double weighty)
-	{
+	private GridBagConstraints createConstraints(int fillType, int gridx, int gridy, double weightx, double weighty) {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = fillType;
-		constraints.gridx=gridx;
-		constraints.gridy=gridy;
-		constraints.weightx=weightx;
-		constraints.weighty=weighty;	
+		constraints.gridx = gridx;
+		constraints.gridy = gridy;
+		constraints.weightx = weightx;
+		constraints.weighty = weighty;
 		return constraints;
 	}
 
 	public void initLayout() {
 		loginField.initLayout();
 		passwordField.initLayout();
-		
+
 		setLayout(new GridBagLayout());
 		userIcon.setImage(userIcon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
 		userIconLabel = new JLabel(userIcon, JLabel.CENTER);
-		add(userIconLabel,createConstraints(GridBagConstraints.BOTH, 0, 0, 0.6, 0.6));
-		
+		add(userIconLabel, createConstraints(GridBagConstraints.BOTH, 0, 0, 0.6, 0.6));
+
 		JPanel fieldPane = new JPanel();
-		fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.X_AXIS));		
-		
+		fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.X_AXIS));
+
 		fieldPane.add(loginField);
-		
+
 		fieldPane.add(passwordField);
-		
+
 		JPanel buttonPanel = new JPanel();
-		GridLayout layout = new GridLayout(2,0);
+		GridLayout layout = new GridLayout(2, 0);
 		layout.setVgap(10);
 		buttonPanel.setLayout(layout);
 		buttonPanel.add(loginButton);
@@ -69,30 +70,38 @@ public class UserLoginPanel extends JPanel implements GuiElement {
 		buttonPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		fieldPane.add(buttonPanel);
 		add(fieldPane, createConstraints(GridBagConstraints.BOTH, 0, 1, 0.4, 0.4));
+				
+		logoutButton.setEnabled(false);
+		loginButton.setEnabled(true);
 	}
-
 
 	public void initActionsAndListeners(ActionListener actionListener) {
 		loginButton.setActionCommand(E_RightPanelActions.LOGIN.name());
-		this.loginButton.addActionListener(actionListener); 
+		this.loginButton.addActionListener(actionListener);
 		
-		this.logoutButton.addActionListener(actionListener); 
-		
+		loginField.setActionCommandForTextValue(E_RightPanelActions.LOGOUT.name());
+		this.logoutButton.addActionListener(actionListener);
+
 		loginField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
-		this.loginField.initActionsAndListeners(actionListener); 
-		
+		this.loginField.initActionsAndListeners(actionListener);
+
 		passwordField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
 		this.passwordField.initActionsAndListeners(actionListener);
 	}
 
-
-	public String getInsertedPassword() {
-		return passwordField.getInsertedText();
+	public ValueField getLoginField() {
+		return loginField;
 	}
 
-
-	public String getInsertedLogin() {
-		return loginField.getInsertedText();
+	public ValueField getPasswordField() {
+		return passwordField;
 	}
 
+	public JButton getLoginButton() {
+		return loginButton;
+	}
+
+	public JButton getLogoutButton() {
+		return logoutButton;
+	}
 }

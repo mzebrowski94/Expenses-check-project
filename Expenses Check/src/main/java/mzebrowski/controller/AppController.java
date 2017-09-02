@@ -1,10 +1,13 @@
 package mzebrowski.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import mzebrowski.gui.centerPanel.CenterPanelController;
 import mzebrowski.gui.menuBar.MenuToolBarController;
 import mzebrowski.gui.rightPanel.RightPanelController;
 
-public class AppController implements ControllerElement {
+public class AppController implements ControllerElement, ActionListener {
 
 	MenuToolBarController menuToolBarController;
 	CenterPanelController centerPanelController;
@@ -16,13 +19,17 @@ public class AppController implements ControllerElement {
 		this.rightPanellController = rightPanellController;
 	}
 
-	public void loadDataToView() {
+	public void loadData() {
 		centerPanelController.loadData();
 		rightPanellController.loadData();
 	}
 
-	public void initListeners() {
-		centerPanelController.initListeners();
-		rightPanellController.initListeners();
+	public void initListeners(ActionListener actionListener) {
+		centerPanelController.initListeners(this);
+		rightPanellController.initListeners(this);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub	
 	}
 }

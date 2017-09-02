@@ -24,9 +24,8 @@ public class CenterPanelFactory {
 						),
 				new RecordTable(
 						new Dimension(500, 500)),
-				new RaportPanel(new JTextPane(), new JLabel("Status: "))
+				new RaportPanel(new JTextPane(), new JLabel("Status: Online "))
 				);
 		return centerPanel;
-	}
-		
+	}	
 }

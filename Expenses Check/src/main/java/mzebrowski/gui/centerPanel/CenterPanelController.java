@@ -1,5 +1,6 @@
 package mzebrowski.gui.centerPanel;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import mzebrowski.controller.ControllerElement;
@@ -32,5 +33,9 @@ public class CenterPanelController implements ControllerElement {
 
 	public void initListeners() {
 		// TODO Auto-generated method stub		
+	}
+
+	public void initListeners(ActionListener actionListener) {
+		// TODO Auto-generated method stub
 	}
 }

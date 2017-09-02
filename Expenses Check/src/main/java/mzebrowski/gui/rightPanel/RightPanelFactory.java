@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.centerPanel.ComboBoxFilter;
+import mzebrowski.gui.rightPanel.expenseAddPanel.ExpenseAddPanel;
+import mzebrowski.gui.rightPanel.userInformationPanel.UserInformationPanel;
+import mzebrowski.gui.rightPanel.userLoginPanel.UserLoginPanel;
 
 public class RightPanelFactory {
 		
@@ -27,9 +30,9 @@ public class RightPanelFactory {
 								new JButton("Logout")
 								),
 						new UserInformationPanel(
-								new JLabel("Default Name"),
+								new JLabel("Mathew"),
 								new JLabel("100"),
-								new JLabel("27.08.2017")
+								new JLabel("02.09.2017")
 								),
 						new ExpenseAddPanel(
 								 new ComboBoxFilter<User>("User: "),

@@ -22,7 +22,7 @@ public class DAOManager {
 	public DAOManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.entityManagerFactory = entityManager.getEntityManagerFactory();
-		//addSomeRandomData();
+		addSomeRandomDataFOR_PREVIEW_ONLY();
 	}
 
 	public GenericDAO getDAO(E_TableType tableType) throws SQLException {
@@ -42,74 +42,48 @@ public class DAOManager {
 		entityManagerFactory.close();
 	}
 
-	private void addSomeRandomData() {
+	private void addSomeRandomDataFOR_PREVIEW_ONLY() {
+		User adam = addSomeUserFOR_PREVIEW_ONLY("Adam","password",100);
+		User eva = addSomeUserFOR_PREVIEW_ONLY("Eva","password",40.10);
+		User joseph = addSomeUserFOR_PREVIEW_ONLY("Joseph","password",34.77);
+		User mathew = addSomeUserFOR_PREVIEW_ONLY("Mathew","password",77);
+		
+		addSomeExpenseFOR_PREVIEW_ONLY(40, "Food for breakfast", adam, E_PurchaseType.SHOPPING);
+		addSomeExpenseFOR_PREVIEW_ONLY(6, "Bus ticket", eva, E_PurchaseType.TICKET);
+		addSomeExpenseFOR_PREVIEW_ONLY(50.55, "Paint for room", joseph, E_PurchaseType.OTHER);
+		addSomeExpenseFOR_PREVIEW_ONLY(150, "Some bills", mathew, E_PurchaseType.BILLS);
+		addSomeExpenseFOR_PREVIEW_ONLY(12, "Launch", eva, E_PurchaseType.SHOPPING);
+		addSomeExpenseFOR_PREVIEW_ONLY(24.50, "Train ticket", joseph, E_PurchaseType.TICKET);
+		addSomeExpenseFOR_PREVIEW_ONLY(70.70, "Jeans", mathew, E_PurchaseType.BILLS);
+		addSomeExpenseFOR_PREVIEW_ONLY(100, "New boots", adam, E_PurchaseType.SHOPPING);
+	}
+	
+	private User addSomeUserFOR_PREVIEW_ONLY(String name, String password, double balance)
+	{
 		User user = new User();
-		user.setUserName("Marta");
-		user.setPassword("password");
-		user.setAccountBalance(100);
+		user.setUserName(name);
+		user.setPassword(password);
+		user.setAccountBalance(balance);
 		user.setData(new Date());
-
-		User user2 = new User();
-		user2.setUserName("Krzysiek");
-		user2.setPassword("passwor2");
-		user2.setAccountBalance(1000);
-		user2.setData(new Date());
-
-		User user3 = new User();
-		user3.setUserName("Bartek");
-		user3.setPassword("passwor2");
-		user3.setAccountBalance(10);
-		user3.setData(new Date());
-
-		// // wrzucanie obiektu od bazy danych - nale¿y zacz¹æ i zakoñczyæ tranzakcjê
+		
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
-		entityManager.persist(user2);
-		entityManager.persist(user3);
 		entityManager.getTransaction().commit();
-
-		Expense exp1 = new Expense();
-		exp1.setAmount(123);
-		exp1.setDate(new Date());
-		exp1.setName("Jedzenie");
-		exp1.setUserID(user);
-		exp1.setPurchaseType(E_PurchaseType.BILLS);
-
-		Expense exp2 = new Expense();
-		exp2.setAmount(444);
-		exp2.setDate(new Date());
-		exp2.setName("a2");
-		exp2.setUserID(user);
-		exp2.setPurchaseType(E_PurchaseType.OTHER);
-
-		Expense exp3 = new Expense();
-		exp3.setAmount(143.12);
-		exp3.setDate(new Date());
-		exp3.setName("a1");
-		exp3.setUserID(user2);
-		exp3.setPurchaseType(E_PurchaseType.TICKET);
-
-		Expense exp4 = new Expense();
-		exp4.setAmount(100.55);
-		exp4.setDate(new Date());
-		exp4.setName("a2");
-		exp4.setUserID(user2);
-		exp3.setPurchaseType(E_PurchaseType.SHOPPING);
-
-		Expense exp5 = new Expense();
-		exp5.setAmount(100.12);
-		exp5.setDate(new Date());
-		exp5.setName("a1");
-		exp5.setUserID(user3);
-		exp5.setPurchaseType(E_PurchaseType.OTHER);
-
+		
+		return user;
+	}
+	
+	private void addSomeExpenseFOR_PREVIEW_ONLY(double amount, String discription, User user, E_PurchaseType purchaseType)
+	{
+		Expense expense = new Expense();
+		expense.setAmount(amount);
+		expense.setDate(new Date());
+		expense.setName(discription);
+		expense.setUserID(user);
+		expense.setPurchaseType(purchaseType);
+		
 		entityManager.getTransaction().begin();
-		entityManager.persist(exp1);
-		entityManager.persist(exp2);
-		entityManager.persist(exp3);
-		entityManager.persist(exp4);
-		entityManager.persist(exp5);
+		entityManager.persist(expense);
 		entityManager.getTransaction().commit();
-
 	}
 }

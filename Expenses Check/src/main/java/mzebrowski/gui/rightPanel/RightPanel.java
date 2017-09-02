@@ -7,6 +7,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import mzebrowski.gui.GuiElement;
+import mzebrowski.gui.rightPanel.expenseAddPanel.ExpenseAddPanel;
+import mzebrowski.gui.rightPanel.userInformationPanel.UserInformationPanel;
+import mzebrowski.gui.rightPanel.userLoginPanel.UserLoginPanel;
 
 @SuppressWarnings("serial")
 public class RightPanel extends JPanel implements GuiElement {

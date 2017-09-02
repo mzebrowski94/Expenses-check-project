@@ -1,4 +1,4 @@
-package mzebrowski.gui.rightPanel;
+package mzebrowski.gui.rightPanel.userInformationPanel;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -34,6 +34,7 @@ public class UserInformationPanel extends JPanel implements GuiElement {
 		add(lastUpdate);
 
 		this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+
 	}
 
 	public void initActionsAndListeners(ActionListener actionListener) {

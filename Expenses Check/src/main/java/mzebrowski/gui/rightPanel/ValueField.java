@@ -47,4 +47,8 @@ public class ValueField extends JPanel implements GuiElement {
 	{
 		textValueField.setEnabled(enable);
 	}
+
+	public void setInsertedText(String string) {
+		textValueField.setText(string);
+	}
 }

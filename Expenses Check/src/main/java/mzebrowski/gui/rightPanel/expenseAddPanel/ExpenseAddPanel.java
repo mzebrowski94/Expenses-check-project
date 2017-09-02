@@ -1,4 +1,4 @@
-package mzebrowski.gui.rightPanel;
+package mzebrowski.gui.rightPanel.expenseAddPanel;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -18,6 +18,7 @@ import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.GuiElement;
 import mzebrowski.gui.centerPanel.ComboBoxFilter;
+import mzebrowski.gui.rightPanel.ValueField;
 
 @SuppressWarnings("serial")
 public class ExpenseAddPanel extends JPanel implements GuiElement {
@@ -37,35 +38,6 @@ public class ExpenseAddPanel extends JPanel implements GuiElement {
 		this.dateFilter = dateFilter;
 		this.addButon = addButon;
 		this.valueField = valueField;
-	}
-
-	public void loadData(ArrayList<User> users) {
-		updateDateCBFilter();
-		updateUserCBFilter(users);
-		updatePurchaseTypeCBFilter();
-	}
-
-	private void updateDateCBFilter() {
-		dateFilter.setOptionListData(getLastWeekDays());
-	}
-
-	private void updateUserCBFilter(ArrayList<User> users) {
-		userFilter.setOptionListData(users);
-	}
-
-	private void updatePurchaseTypeCBFilter() {
-		purchaseTypeFilter.setOptionListData(new ArrayList<E_PurchaseType>(Arrays.asList(E_PurchaseType.values())));
-	}
-
-	private ArrayList<LocalDate> getLastWeekDays() {
-		LocalDate start = LocalDate.now();
-		LocalDate end = LocalDate.now().minusWeeks(1);
-		ArrayList<LocalDate> totalDates = new ArrayList<LocalDate>();
-		while (start.isAfter(end)) {
-			totalDates.add(start);
-			start = start.minusDays(1);
-		}
-		return totalDates;
 	}
 
 	public void initLayout() {
@@ -117,4 +89,29 @@ public class ExpenseAddPanel extends JPanel implements GuiElement {
 		this.addButon.setEnabled(enable);
 		this.valueField.setTypingEnabled(enable);
 	}
+
+	public ComboBoxFilter<LocalDate> getDateFilter() {
+		return dateFilter;
+	}
+
+	public ComboBoxFilter<User> getUserFilter() {
+		return userFilter;
+	}
+
+	public ComboBoxFilter<E_PurchaseType> getPurchaseTypeFilter() {
+		return purchaseTypeFilter;
+	}
+
+	public ValueField getValueField() {
+		return valueField;
+	}
+
+	public ValueField getDiscriptionField() {
+		return discriptionField;
+	}
+
+	public JButton getAddButon() {
+		return addButon;
+	}
+	
 }
