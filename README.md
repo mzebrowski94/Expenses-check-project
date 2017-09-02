@@ -13,8 +13,8 @@ Expenses Check is a software designed to monitor, update and organize expenses, 
 
 **Use instruction:**
 
-The program user connects to the local server via the application, and then after logging in to his own account he has the ability to edit his / her expense history.
-If there is no connection to the server, the application connects to the internal database. After a successful online connection, the data is merged and refreshed.
+Program user connects to the local server via application, and then after logging in to his own account he has the ability to edit his expense history.
+If there is no connection to the server, the application connects to the internal embeded database. After a successful online connection, the data between embeded and external datebase is merged and refreshed.
 
 ![Preview image:](https://preview.ibb.co/hbE4Mv/preview.png)
 
