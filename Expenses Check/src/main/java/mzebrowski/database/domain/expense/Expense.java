@@ -1,4 +1,4 @@
-package mzebrowski.database.domain;
+package mzebrowski.database.domain.expense;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.user.User;
 
 @Entity
 @Table(name = "Expenses")
@@ -36,7 +39,7 @@ public class Expense {
 
 	@ManyToOne
 	@JoinColumn(name = "userID")
-	private User userId;
+	private User userID;
 
 	public int getIdExpenses() {
 		return idExpenses;
@@ -78,12 +81,12 @@ public class Expense {
 		this.date = date;
 	}
 
-	public User getUserId() {
-		return userId;
+	public User getUserID() {
+		return userID;
 	}
 
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setUserID(User userID) {
+		this.userID = userID;
 	}
 
 }

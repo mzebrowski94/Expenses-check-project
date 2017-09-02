@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import mzebrowski.database.domain.User;
+import mzebrowski.database.domain.user.User;
 
 
 

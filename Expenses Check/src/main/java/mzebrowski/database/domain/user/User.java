@@ -1,4 +1,4 @@
-package mzebrowski.database.domain;
+package mzebrowski.database.domain.user;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import mzebrowski.database.domain.expense.Expense;
 
 @Entity
 @Table(name = "Users")
@@ -37,7 +39,7 @@ public class User {
 	@Column(name = "last_update")
 	private java.util.Date lastUpdate;
 	
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "userID")
 	private List<Expense> expenses;	
 	
 	public double getAccountBalance() {

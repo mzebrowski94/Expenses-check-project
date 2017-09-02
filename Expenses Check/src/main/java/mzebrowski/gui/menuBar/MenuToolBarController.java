@@ -1,14 +1,14 @@
 package mzebrowski.gui.menuBar;
 
-import mzebrowski.database.DAOManager;
+import mzebrowski.database.services.ServiceManager;
 
 public class MenuToolBarController {
 
-	DAOManager daoManager;
+	ServiceManager serviceManager;
 	MenuToolBar menuToolBar;
 	
-	public MenuToolBarController(DAOManager daoManager, MenuToolBar menuToolBar) {
-		this.daoManager = daoManager;
+	public MenuToolBarController(ServiceManager serviceManager, MenuToolBar menuToolBar) {
+		this.serviceManager = serviceManager;
 		this.menuToolBar = menuToolBar;
 	}
 }

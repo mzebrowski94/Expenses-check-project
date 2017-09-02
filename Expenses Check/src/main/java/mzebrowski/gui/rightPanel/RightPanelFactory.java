@@ -1,6 +1,7 @@
 package mzebrowski.gui.rightPanel;
 
 import java.text.NumberFormat;
+import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -9,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.centerPanel.ComboBoxFilter;
 
 public class RightPanelFactory {
@@ -19,7 +22,9 @@ public class RightPanelFactory {
 						new UserLoginPanel(
 								new ValueField(new JTextField(),"User name: ","0"),
 								new ValueField(new JPasswordField(),"Password: ","0"),
-								new ImageIcon("src/main/resources/images/avatar.png")
+								new ImageIcon("src/main/resources/images/avatar.png"),
+								new JButton("Login"),
+								new JButton("Logout")
 								),
 						new UserInformationPanel(
 								new JLabel("Default Name"),
@@ -27,9 +32,9 @@ public class RightPanelFactory {
 								new JLabel("27.08.2017")
 								),
 						new ExpenseAddPanel(
-								 new ComboBoxFilter("User: "),
-								 new ComboBoxFilter("Purchase type: "),
-								 new ComboBoxFilter("Date: "),
+								 new ComboBoxFilter<User>("User: "),
+								 new ComboBoxFilter<E_PurchaseType>("Purchase type: "),
+								 new ComboBoxFilter<LocalDate>("Date: "),
 								 new ValueField(new JFormattedTextField(NumberFormat.getNumberInstance()),"Amount: ","0"),
 								 new JButton("Add"),
 								 new ValueField(new JTextField(),"Discription:"," ")

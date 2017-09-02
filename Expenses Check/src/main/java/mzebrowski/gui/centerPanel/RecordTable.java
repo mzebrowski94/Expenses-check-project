@@ -1,6 +1,7 @@
 package mzebrowski.gui.centerPanel;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,17 +10,34 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import mzebrowski.database.domain.E_PurchaseType;
-import mzebrowski.database.domain.Expense;
+import mzebrowski.database.domain.expense.Expense;
+import mzebrowski.gui.GuiElement;
 
 @SuppressWarnings("serial")
-public class RecordTable extends JTable {
+public class RecordTable extends JTable implements GuiElement {
 
 	private String[] columnNames;
 	private Class[] columnClasses;
 	private DefaultTableModel model;
-
+	private Dimension preferedSize;
+	
 	public RecordTable(Dimension preferedSize) {
-		this.setPreferredSize(preferedSize);
+		initModel();
+	}
+
+	public void updateRecordTableData(ArrayList<Expense> arrayList) {
+
+		Object[][] data = new Object[arrayList.size()][columnNames.length];
+		for (int i = 0; i < arrayList.size(); i++) {
+			Expense expense = arrayList.get(i);
+			data[i] = new Object[] { expense.getUserID().getUserName(), expense.getDate(), expense.getPurchaseType(),
+					expense.getName(), expense.getAmount() };
+		}
+
+		model.setDataVector(data, columnNames);
+	}
+
+	private void initModel() {
 		// headers for the table
 		columnNames = new String[] { "UserName", "Date", "Type", "Name", "Amount" };
 		columnClasses = new Class[] { String.class, Date.class, E_PurchaseType.class, String.class, Double.class };
@@ -40,16 +58,12 @@ public class RecordTable extends JTable {
 		this.setModel(model);
 	}
 
-	public void updateRecordTableData(ArrayList<Expense> arrayList) {
+	public void initLayout() {
+		this.setPreferredSize(preferedSize);
+	}
 
-		Object[][] data = new Object[arrayList.size()][columnNames.length];
-		for (int i = 0; i < arrayList.size(); i++) {
-			Expense expense = arrayList.get(i);
-			data[i] = new Object[] { expense.getUserId().getUserName(), expense.getDate(), expense.getPurchaseType(),
-					expense.getName(), expense.getAmount() };
-		}
-
-		model.setDataVector(data, columnNames);
+	public void initActionsAndListeners(ActionListener actionListener) {
+			
 	}
 
 }

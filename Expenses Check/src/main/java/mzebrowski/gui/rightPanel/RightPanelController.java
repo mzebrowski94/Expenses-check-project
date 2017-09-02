@@ -1,26 +1,25 @@
 package mzebrowski.gui.rightPanel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import mzebrowski.database.DAOManager;
-import mzebrowski.database.DAOs.ExpenseDAO;
-import mzebrowski.database.DAOs.UserDAO;
-import mzebrowski.database.domain.User;
+import javax.swing.JOptionPane;
 
-public class RightPanelController {
+import mzebrowski.controller.ControllerElement;
+import mzebrowski.database.domain.user.User;
+import mzebrowski.database.services.ServiceManager;
 
-	DAOManager daoManager;
+public class RightPanelController implements ActionListener, ControllerElement {
+
+	ServiceManager serviceManager;
 	RightPanel rightPanel;
 	UserLoginPanel userLoginPanel;
 	UserInformationPanel userInformationPanel;
 	ExpenseAddPanel addExpensePanel;
-	private ExpenseDAO expenseDAO;
-	private UserDAO userDAO;
-	
-	public RightPanelController(DAOManager daoManager, RightPanel rightPanel) {
-		this.daoManager = daoManager;
-		this.expenseDAO = daoManager.getExpenseDAO();
-		this.userDAO = daoManager.getUserDAO();
+
+	public RightPanelController(ServiceManager serviceManager, RightPanel rightPanel) {
+		this.serviceManager = serviceManager;
 		this.rightPanel = rightPanel;
 		this.userLoginPanel = rightPanel.getUserAvatarPanel();
 		this.userInformationPanel = rightPanel.getUserInformationPanel();
@@ -28,6 +27,36 @@ public class RightPanelController {
 	}
 
 	public void loadData() {
-		addExpensePanel.loadData((ArrayList<User>) userDAO.getAll());
+		addExpensePanel.loadData((ArrayList<User>) serviceManager.getAllUsers());
+	}
+
+	public void actionPerformed(ActionEvent event) {
+		if (event.getActionCommand() == E_RightPanelActions.LOGIN.actionName()) {
+			proceedLogin();	
+		}
+		
+	}
+
+	public void initListeners() {
+		userLoginPanel.initActionsAndListeners(this);
+	}
+
+	private void proceedLogin()
+	{
+		String password = userLoginPanel.getInsertedPassword();
+		String login = userLoginPanel.getInsertedLogin();
+		if(password.equals("") || login.equals(""))
+			JOptionPane.showMessageDialog(null, "Empty login or password field.\nTry again.", "Empty login or password field.", JOptionPane.ERROR_MESSAGE);
+		else
+		{
+			if(serviceManager.loginAuthorization(login,password))
+				{
+				addExpensePanel.setAddingEnabled(true);
+				//JOptionPane.showMessageDialog(null, "OK");
+				}
+			else
+				JOptionPane.showMessageDialog(null, "Incorrect login or password.\nTry again.", "Authorization error.", JOptionPane.ERROR_MESSAGE);
+		}
+			
 	}
 }

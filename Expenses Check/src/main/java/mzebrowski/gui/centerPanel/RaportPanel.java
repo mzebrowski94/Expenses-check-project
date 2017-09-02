@@ -1,35 +1,50 @@
 package mzebrowski.gui.centerPanel;
 
-import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
-public class RaportPanel extends JPanel {
+import mzebrowski.gui.GuiElement;
 
-	JEditorPane raportPanel;
+public class RaportPanel extends JPanel implements GuiElement {
+
+	JTextPane raportPanel;
 	JLabel connectionStatus;
-	
-	public RaportPanel(String raportPanelName, JEditorPane raportPanel, JLabel connectionStatus) {
 
-		
-		setBorder(BorderFactory.createTitledBorder(raportPanelName));
-		BoxLayout layout = new BoxLayout(this,BoxLayout.Y_AXIS);
-		setLayout(layout);
-		
+	public RaportPanel(JTextPane raportPanel, JLabel connectionStatus) {
 		this.raportPanel = raportPanel;
+		this.connectionStatus = connectionStatus;
+	}
+
+	public void updateData(ArrayList<String> raport) {
+
+		String newRaport = "Amount spent this month: \n";
+		for (String itr : raport) {
+			newRaport += itr + "\n";
+		}
+
+		raportPanel.setText(newRaport);
+	}
+
+	public void initLayout() {
+		setBorder(BorderFactory.createTitledBorder("Raport:"));
+		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
+		setLayout(layout);
+
 		raportPanel.setEditable(false);
 		add(raportPanel);
-		
-		this.connectionStatus = connectionStatus;
+
 		this.connectionStatus.setHorizontalAlignment(JLabel.LEFT);
 		add(connectionStatus);
 	}
 
-	public void updateData(String raport) {
+	public void initActionsAndListeners(ActionListener actionListener) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -2,70 +2,97 @@ package mzebrowski.gui.rightPanel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
-@SuppressWarnings("serial")
-public class UserLoginPanel extends JPanel {
+import mzebrowski.gui.GuiElement;
 
-	// private int size = 100;
-	// private String userLetter;
+@SuppressWarnings("serial")
+public class UserLoginPanel extends JPanel implements GuiElement {
 
 	ValueField loginField, passwordField;
 	JLabel userIconLabel;
 	ImageIcon userIcon;
-
-	public UserLoginPanel(ValueField loginField, ValueField passwordField, ImageIcon userIcon) {		
-		setLayout(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
-				
-		constraints.fill = GridBagConstraints.BOTH;
-		constraints.gridy=0;
-		constraints.weightx=1;
-		constraints.weighty=1;
+	JButton loginButton, logoutButton;
+	
+	public UserLoginPanel(ValueField loginField, ValueField passwordField, ImageIcon userIcon, JButton loginButton, JButton logoutButton) {		
 		this.userIcon = userIcon;
-		userIcon.setImage(userIcon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-		userIconLabel = new JLabel(userIcon, JLabel.CENTER);
-		userIconLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-		add(userIconLabel,constraints);
-
-		
-		constraints.fill = GridBagConstraints.BOTH;
-		constraints.gridy=1;
-		constraints.weightx=1;
-		constraints.weighty=1;
-		JPanel loginPane = new JPanel();
-		BoxLayout loginPaneLayout = new BoxLayout(loginPane, BoxLayout.X_AXIS);
-		loginPane.setLayout(loginPaneLayout);
-		
+		this.loginButton = loginButton;	
+		this.logoutButton = logoutButton;
 		this.loginField = loginField;
-		loginPane.add(loginField);
 		this.passwordField = passwordField;
-		loginPane.add(passwordField);
-		
-		
-		add(loginPane, constraints);
 	}
 
-	// @Override
-	// protected void paintComponent(Graphics g) {
-	// super.paintComponent(g);
-	// // g.drawImage(image, 0, 0, this); // see javadoc for more info on the
-	// // parameters
-	//
-	// g.setColor(Color.WHITE);
-	// g.fillRect(0, 0, size, size);
-	// }
-	// setPreferredSize(new Dimension(size, size));
-	// try {
-	// image = ImageIO.read(new File("template.png"));
-	// } catch (IOException ex) {
-	// // handle exception...
-	// }
+	
+	private GridBagConstraints createConstraints(int fillType,int gridx, int gridy,double weightx, double weighty)
+	{
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.fill = fillType;
+		constraints.gridx=gridx;
+		constraints.gridy=gridy;
+		constraints.weightx=weightx;
+		constraints.weighty=weighty;	
+		return constraints;
+	}
+
+	public void initLayout() {
+		loginField.initLayout();
+		passwordField.initLayout();
+		
+		setLayout(new GridBagLayout());
+		userIcon.setImage(userIcon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+		userIconLabel = new JLabel(userIcon, JLabel.CENTER);
+		add(userIconLabel,createConstraints(GridBagConstraints.BOTH, 0, 0, 0.6, 0.6));
+		
+		JPanel fieldPane = new JPanel();
+		fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.X_AXIS));		
+		
+		fieldPane.add(loginField);
+		
+		fieldPane.add(passwordField);
+		
+		JPanel buttonPanel = new JPanel();
+		GridLayout layout = new GridLayout(2,0);
+		layout.setVgap(10);
+		buttonPanel.setLayout(layout);
+		buttonPanel.add(loginButton);
+		buttonPanel.add(logoutButton);
+		buttonPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		fieldPane.add(buttonPanel);
+		add(fieldPane, createConstraints(GridBagConstraints.BOTH, 0, 1, 0.4, 0.4));
+	}
+
+
+	public void initActionsAndListeners(ActionListener actionListener) {
+		loginButton.setActionCommand(E_RightPanelActions.LOGIN.name());
+		this.loginButton.addActionListener(actionListener); 
+		
+		this.logoutButton.addActionListener(actionListener); 
+		
+		loginField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
+		this.loginField.initActionsAndListeners(actionListener); 
+		
+		passwordField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
+		this.passwordField.initActionsAndListeners(actionListener);
+	}
+
+
+	public String getInsertedPassword() {
+		return passwordField.getInsertedText();
+	}
+
+
+	public String getInsertedLogin() {
+		return loginField.getInsertedText();
+	}
+
 }

@@ -2,27 +2,22 @@ package mzebrowski.gui.centerPanel;
 
 import java.util.ArrayList;
 
-import mzebrowski.database.DAOManager;
-import mzebrowski.database.DAOs.ExpenseDAO;
-import mzebrowski.database.DAOs.UserDAO;
-import mzebrowski.database.domain.Expense;
-import mzebrowski.database.domain.User;
+import mzebrowski.controller.ControllerElement;
+import mzebrowski.database.domain.expense.Expense;
+import mzebrowski.database.domain.user.User;
+import mzebrowski.database.services.ServiceManager;
 
-public class CenterPanelController {
+public class CenterPanelController implements ControllerElement {
 
-	private DAOManager daoManager;
+	ServiceManager serviceManager;
 	private CenterPanel centerPanel;
 	private ComboBoxesToolbar comboBoxesToolbar;
 	private RecordTable recordTable;
 	private RaportPanel raportPanel;
-	private ExpenseDAO expenseDAO;
-	private UserDAO userDAO;
 	
-	public CenterPanelController(DAOManager daoManager, CenterPanel centerPanel) {
+	public CenterPanelController(ServiceManager serviceManager, CenterPanel centerPanel) {
 		
-		this.daoManager = daoManager;
-		this.expenseDAO = daoManager.getExpenseDAO();
-		this.userDAO = daoManager.getUserDAO();
+		this.serviceManager = serviceManager;
 		this.centerPanel = centerPanel;
 		this.comboBoxesToolbar = centerPanel.getComboBoxesToolbar();
 		this.recordTable = centerPanel.getRecordTable();
@@ -30,9 +25,12 @@ public class CenterPanelController {
 	}
 
 	public void loadData() {
-		comboBoxesToolbar.loadData((ArrayList<User>) userDAO.getAll());	
-		recordTable.updateRecordTableData((ArrayList<Expense>) expenseDAO.getAll());
-		raportPanel.updateData("raport");
-		
+		comboBoxesToolbar.loadData((ArrayList<User>) serviceManager.getAllUsers());	
+		recordTable.updateRecordTableData((ArrayList<Expense>) serviceManager.getAllExpenses());
+		raportPanel.updateData((ArrayList<String>) serviceManager.getUserExpensesRaport());
+	}
+
+	public void initListeners() {
+		// TODO Auto-generated method stub		
 	}
 }

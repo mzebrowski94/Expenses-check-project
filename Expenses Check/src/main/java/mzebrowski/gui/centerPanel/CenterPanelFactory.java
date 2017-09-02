@@ -3,11 +3,11 @@ package mzebrowski.gui.centerPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JTextPane;
 
 import mzebrowski.database.domain.E_PurchaseType;
-import mzebrowski.database.domain.User;
+import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.centerPanel.IconShape.IconType;
 
 public class CenterPanelFactory {
@@ -24,7 +24,7 @@ public class CenterPanelFactory {
 						),
 				new RecordTable(
 						new Dimension(500, 500)),
-				new RaportPanel("Status bar: ", new JEditorPane(), new JLabel("Status: "))
+				new RaportPanel(new JTextPane(), new JLabel("Status: "))
 				);
 		return centerPanel;
 	}

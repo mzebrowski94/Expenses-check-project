@@ -1,36 +1,42 @@
 package mzebrowski.gui.rightPanel;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
+
+import mzebrowski.gui.GuiElement;
 
 @SuppressWarnings("serial")
-public class UserInformationPanel extends JPanel {
+public class UserInformationPanel extends JPanel implements GuiElement {
 	JLabel nameLabel, accountBalance, lastUpdate;
 
-	public UserInformationPanel(JLabel nameLabel,JLabel accountBalance,JLabel lastUpdate) {
+	public UserInformationPanel(JLabel nameLabel, JLabel accountBalance, JLabel lastUpdate) {
+		this.nameLabel = nameLabel;
+		this.accountBalance = accountBalance;
+		this.lastUpdate = lastUpdate;
+	}
 
+	public void initLayout() {
 		GridLayout gridLayout = new GridLayout(3, 0, 10, 0);
 		setLayout(gridLayout);
-		
-		
-		this.nameLabel = nameLabel;
+
 		nameLabel.setBorder(BorderFactory.createTitledBorder("Name: "));
 		add(nameLabel);
-		
-		this.accountBalance = accountBalance;
+
 		accountBalance.setBorder(BorderFactory.createTitledBorder("Account balance: "));
 		add(accountBalance);
-		
-		this.lastUpdate = lastUpdate;
+
 		lastUpdate.setBorder(BorderFactory.createTitledBorder("Last updated: "));
 		add(lastUpdate);
-		
+
 		this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+	}
+
+	public void initActionsAndListeners(ActionListener actionListener) {
+		
 	}
 }

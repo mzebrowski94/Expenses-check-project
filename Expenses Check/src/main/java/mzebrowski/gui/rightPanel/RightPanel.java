@@ -1,33 +1,25 @@
 package mzebrowski.gui.rightPanel;
 
-
-import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import mzebrowski.gui.GuiElement;
+
 @SuppressWarnings("serial")
-public class RightPanel extends JPanel {
+public class RightPanel extends JPanel implements GuiElement {
 
 	UserLoginPanel userLoginPanel;
 	UserInformationPanel userInformationPanel;
 	ExpenseAddPanel addExpensePanel;
-	
-	public RightPanel(UserLoginPanel userLoginPanel,UserInformationPanel userInformationPanel,ExpenseAddPanel addExpensePanel) {
-		BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
-		setLayout(boxLayout);
-		
+
+	public RightPanel(UserLoginPanel userLoginPanel, UserInformationPanel userInformationPanel,
+			ExpenseAddPanel addExpensePanel) {
 		this.userLoginPanel = userLoginPanel;
-		add(userLoginPanel);
-		
 		this.userInformationPanel = userInformationPanel;
-		add(userInformationPanel);
-		
 		this.addExpensePanel = addExpensePanel;
-		add(addExpensePanel);
-		
-		setBorder(BorderFactory.createLoweredBevelBorder());
 	}
 
 	public UserLoginPanel getUserAvatarPanel() {
@@ -41,6 +33,22 @@ public class RightPanel extends JPanel {
 	public ExpenseAddPanel getAddExpensePanel() {
 		return addExpensePanel;
 	}
-	
-	
+
+	public void initLayout() {
+		userLoginPanel.initLayout();
+		userInformationPanel.initLayout();
+		addExpensePanel.initLayout();
+		
+		GridLayout layout = new GridLayout(3, 0);
+		setLayout(layout);
+		add(userLoginPanel);
+		add(userInformationPanel);
+		add(addExpensePanel);
+		setBorder(BorderFactory.createLoweredBevelBorder());
+	}
+
+	public void initActionsAndListeners(ActionListener actionListener) {
+		// TODO Auto-generated method stub
+	}
+
 }

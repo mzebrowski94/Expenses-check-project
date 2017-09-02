@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import mzebrowski.database.domain.User;
+import mzebrowski.database.domain.E_TableType;
+import mzebrowski.database.domain.user.User;
 
 public class UserDAO extends GenericDAO<User> {
 
-	public UserDAO(EntityManager entityManager, String tableName) {
-		super(entityManager, tableName);
+	public UserDAO(EntityManager entityManager, E_TableType tableType) {
+		super(entityManager, tableType);
 	}
 
 	@Override
@@ -21,6 +24,13 @@ public class UserDAO extends GenericDAO<User> {
 	@Override
 	public List<String> getAllNames() {
 		return entityManager.createQuery("select u.userName from User u", String.class).getResultList();
+	}
+
+	public User getUser(String userName) {
+		
+			TypedQuery<User> query = entityManager.createQuery("from User u where u.userName = :userName", User.class);				
+			query.setParameter("userName", userName);
+			return getSingleResult(query);
 	}
 
 }
