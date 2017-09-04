@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -13,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import mzebrowski.database.domain.E_AccesType;
+import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.expense.Expense;
 
 @Entity
@@ -32,8 +36,9 @@ public class User {
 	@Column(name = "password", nullable = false, length = 20)
 	private String password;
 
-	@Column(name = "account_balance", precision = 5, scale = 2)
-	private double accountBalance;
+	@Column
+	@Enumerated(EnumType.ORDINAL)
+    private E_AccesType accesType;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "last_update")
@@ -42,13 +47,6 @@ public class User {
 	@OneToMany(mappedBy = "userID")
 	private List<Expense> expenses;	
 	
-	public double getAccountBalance() {
-		return accountBalance;
-	}
-
-	public void setAccountBalance(double accountBalance) {
-		this.accountBalance = accountBalance;
-	}
 
 	public java.util.Date getLastUpdate() {
 		return lastUpdate;
@@ -96,6 +94,15 @@ public class User {
 
 	public void setData(java.util.Date data) {
 		this.lastUpdate = data;
+	}
+
+	
+	public E_AccesType getAccesType() {
+		return accesType;
+	}
+
+	public void setAccesType(E_AccesType accesType) {
+		this.accesType = accesType;
 	}
 
 	@Override

@@ -9,6 +9,8 @@ import javax.persistence.EntityManagerFactory;
 import mzebrowski.database.DAOs.ExpenseDAO;
 import mzebrowski.database.DAOs.GenericDAO;
 import mzebrowski.database.DAOs.UserDAO;
+import mzebrowski.database.domain.E_AccesType;
+import mzebrowski.database.domain.E_ExpenseType;
 import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.E_TableType;
 import mzebrowski.database.domain.expense.Expense;
@@ -22,7 +24,7 @@ public class DAOManager {
 	public DAOManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.entityManagerFactory = entityManager.getEntityManagerFactory();
-		addSomeRandomDataFOR_PREVIEW_ONLY();
+		//addSomeRandomDataFOR_PREVIEW_ONLY();
 	}
 
 	public GenericDAO getDAO(E_TableType tableType) throws SQLException {
@@ -43,28 +45,29 @@ public class DAOManager {
 	}
 
 	private void addSomeRandomDataFOR_PREVIEW_ONLY() {
-		User adam = addSomeUserFOR_PREVIEW_ONLY("Adam","password",100);
-		User eva = addSomeUserFOR_PREVIEW_ONLY("Eva","password",40.10);
-		User joseph = addSomeUserFOR_PREVIEW_ONLY("Joseph","password",34.77);
-		User mathew = addSomeUserFOR_PREVIEW_ONLY("Mathew","password",77);
+		User adam = addSomeUserFOR_PREVIEW_ONLY("Adam","password",E_AccesType.ALL_USERS);
+		User eva = addSomeUserFOR_PREVIEW_ONLY("Eva","password",E_AccesType.OWN_ONLY);
+		User joseph = addSomeUserFOR_PREVIEW_ONLY("Joseph","password",E_AccesType.ALL_USERS);
+		User mathew = addSomeUserFOR_PREVIEW_ONLY("Mathew","password",E_AccesType.ALL_USERS);
+		User admin = addSomeUserFOR_PREVIEW_ONLY("a","a",E_AccesType.ADMIN);
 		
-		addSomeExpenseFOR_PREVIEW_ONLY(40, "Food for breakfast", adam, E_PurchaseType.SHOPPING);
-		addSomeExpenseFOR_PREVIEW_ONLY(6, "Bus ticket", eva, E_PurchaseType.TICKET);
-		addSomeExpenseFOR_PREVIEW_ONLY(50.55, "Paint for room", joseph, E_PurchaseType.OTHER);
-		addSomeExpenseFOR_PREVIEW_ONLY(150, "Some bills", mathew, E_PurchaseType.BILLS);
-		addSomeExpenseFOR_PREVIEW_ONLY(12, "Launch", eva, E_PurchaseType.SHOPPING);
-		addSomeExpenseFOR_PREVIEW_ONLY(24.50, "Train ticket", joseph, E_PurchaseType.TICKET);
-		addSomeExpenseFOR_PREVIEW_ONLY(70.70, "Jeans", mathew, E_PurchaseType.BILLS);
-		addSomeExpenseFOR_PREVIEW_ONLY(100, "New boots", adam, E_PurchaseType.SHOPPING);
+		addSomeExpenseFOR_PREVIEW_ONLY(40, "Food for breakfast", adam, E_PurchaseType.SHOPPING, E_ExpenseType.GROUP);
+		addSomeExpenseFOR_PREVIEW_ONLY(6, "Bus ticket", eva, E_PurchaseType.TICKET,E_ExpenseType.OWN);
+		addSomeExpenseFOR_PREVIEW_ONLY(50.55, "Paint for room", joseph, E_PurchaseType.OTHER,E_ExpenseType.GROUP);
+		addSomeExpenseFOR_PREVIEW_ONLY(150, "Some bills", mathew, E_PurchaseType.BILLS,E_ExpenseType.OWN);
+		addSomeExpenseFOR_PREVIEW_ONLY(12, "Launch", eva, E_PurchaseType.SHOPPING,E_ExpenseType.GROUP);
+		addSomeExpenseFOR_PREVIEW_ONLY(24.50, "Train ticket", joseph, E_PurchaseType.TICKET,E_ExpenseType.OWN);
+		addSomeExpenseFOR_PREVIEW_ONLY(70.70, "Jeans", mathew, E_PurchaseType.BILLS,E_ExpenseType.GROUP);
+		addSomeExpenseFOR_PREVIEW_ONLY(100, "New boots", adam, E_PurchaseType.SHOPPING,E_ExpenseType.OWN);
 	}
 	
-	private User addSomeUserFOR_PREVIEW_ONLY(String name, String password, double balance)
+	private User addSomeUserFOR_PREVIEW_ONLY(String name, String password, E_AccesType accesType)
 	{
 		User user = new User();
 		user.setUserName(name);
 		user.setPassword(password);
-		user.setAccountBalance(balance);
 		user.setData(new Date());
+		user.setAccesType(accesType);
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
@@ -73,17 +76,24 @@ public class DAOManager {
 		return user;
 	}
 	
-	private void addSomeExpenseFOR_PREVIEW_ONLY(double amount, String discription, User user, E_PurchaseType purchaseType)
+	private void addSomeExpenseFOR_PREVIEW_ONLY(double amount, String discription, User user, E_PurchaseType purchaseType, E_ExpenseType expenseType)
 	{
 		Expense expense = new Expense();
 		expense.setAmount(amount);
 		expense.setDate(new Date());
-		expense.setName(discription);
+		expense.setDiscription(discription);
 		expense.setUserID(user);
 		expense.setPurchaseType(purchaseType);
+		expense.setExpenseType(expenseType);
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(expense);
 		entityManager.getTransaction().commit();
 	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+	
+	
 }

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import mzebrowski.database.DAOManager;
 import mzebrowski.database.DAOs.ExpenseDAO;
 import mzebrowski.database.DAOs.UserDAO;
@@ -48,6 +50,14 @@ public class ServiceManager {
 			return true;
 		else
 			return false;
+	}
+
+	public void addNewRecord(Expense expense) {
+		EntityManager entityManager = daoManager.getEntityManager();
+		
+		entityManager.getTransaction().begin();
+		entityManager.persist(expense);
+		entityManager.getTransaction().commit();
 	}
 	
 	

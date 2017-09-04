@@ -56,8 +56,8 @@ public class UserLoginPanelController implements ControllerElement {
 		System.out.println("logout");
 		loginButton.setEnabled(true);
 		logoutButton.setEnabled(false);
-		loginField.setInsertedText("zxc");
-		passwordField.setInsertedText("zxc");
+		loginField.setInsertedText("");
+		passwordField.setInsertedText("");
 	}
 
 	public void loadData() {

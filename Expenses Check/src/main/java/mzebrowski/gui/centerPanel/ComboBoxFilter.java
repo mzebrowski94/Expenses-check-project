@@ -44,7 +44,15 @@ public class ComboBoxFilter<T> extends JPanel implements GuiElement {
 	public void setChoosingEnabled(boolean enable) {
 		optionList.setEnabled(enable);
 	}
+
+	public void setActionCommandForComboBox(String actionName) {
+		optionList.setActionCommand(actionName);
+	}
 	
+	public Object getSelectedItem()
+	{
+		return optionList.getSelectedItem();
+	}
 	
 	// get the selected item:
 	// String selectedBook = (String) optionList.getSelectedItem();

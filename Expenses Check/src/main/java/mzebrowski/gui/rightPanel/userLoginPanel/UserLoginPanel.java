@@ -79,7 +79,7 @@ public class UserLoginPanel extends JPanel implements GuiElement {
 		loginButton.setActionCommand(E_RightPanelActions.LOGIN.name());
 		this.loginButton.addActionListener(actionListener);
 		
-		loginField.setActionCommandForTextValue(E_RightPanelActions.LOGOUT.name());
+		logoutButton.setActionCommand(E_RightPanelActions.LOGOUT.name());
 		this.logoutButton.addActionListener(actionListener);
 
 		loginField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());

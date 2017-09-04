@@ -12,11 +12,11 @@ import mzebrowski.gui.GuiElement;
 
 @SuppressWarnings("serial")
 public class UserInformationPanel extends JPanel implements GuiElement {
-	JLabel nameLabel, accountBalance, lastUpdate;
+	JLabel lastUpdate, ownExpenses, groupExpenses;
 
-	public UserInformationPanel(JLabel nameLabel, JLabel accountBalance, JLabel lastUpdate) {
-		this.nameLabel = nameLabel;
-		this.accountBalance = accountBalance;
+	public UserInformationPanel(JLabel ownExpenses, JLabel groupExpenses, JLabel lastUpdate) {
+		this.ownExpenses = ownExpenses;
+		this.groupExpenses = groupExpenses;
 		this.lastUpdate = lastUpdate;
 	}
 
@@ -24,11 +24,11 @@ public class UserInformationPanel extends JPanel implements GuiElement {
 		GridLayout gridLayout = new GridLayout(3, 0, 10, 0);
 		setLayout(gridLayout);
 
-		nameLabel.setBorder(BorderFactory.createTitledBorder("Name: "));
-		add(nameLabel);
+		ownExpenses.setBorder(BorderFactory.createTitledBorder("Own expenses: "));
+		add(ownExpenses);
 
-		accountBalance.setBorder(BorderFactory.createTitledBorder("Account balance: "));
-		add(accountBalance);
+		groupExpenses.setBorder(BorderFactory.createTitledBorder("Group expenses: "));
+		add(groupExpenses);
 
 		lastUpdate.setBorder(BorderFactory.createTitledBorder("Last updated: "));
 		add(lastUpdate);

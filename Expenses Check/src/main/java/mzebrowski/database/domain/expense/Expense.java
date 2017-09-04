@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import mzebrowski.database.domain.E_ExpenseType;
 import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 
@@ -23,12 +24,16 @@ public class Expense {
 	@GeneratedValue
 	private int idExpenses;
 
-	@Column(name = "name", length = 20)
-	private String name;
+	@Column(name = "discription", length = 20)
+	private String discription;
 
 	@Column
 	@Enumerated(EnumType.ORDINAL)
     private E_PurchaseType purchaseType;
+	
+	@Column
+	@Enumerated(EnumType.ORDINAL)
+    private E_ExpenseType expenseType;
 	
 	@Column(name = "amount", nullable = false, precision = 4, scale = 2)
 	private double amount;
@@ -49,12 +54,12 @@ public class Expense {
 		this.idExpenses = idExpenses;
 	}
 
-	public String getName() {
-		return name;
+	public String getDiscription() {
+		return discription;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDiscription(String name) {
+		this.discription = name;
 	}
 	
 	public E_PurchaseType getPurchaseType() {
@@ -88,5 +93,18 @@ public class Expense {
 	public void setUserID(User userID) {
 		this.userID = userID;
 	}
+	
+	public E_ExpenseType getExpenseType() {
+		return expenseType;
+	}
 
+	public void setExpenseType(E_ExpenseType expenseType) {
+		this.expenseType = expenseType;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "" + getAmount() + ", " + getDate() + ", " + getDiscription() + ", " + getPurchaseType() + ", " + getUserID().toString();  
+	}
 }

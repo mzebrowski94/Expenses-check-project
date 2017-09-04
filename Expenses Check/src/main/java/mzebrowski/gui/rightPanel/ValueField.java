@@ -17,12 +17,14 @@ public class ValueField extends JPanel implements GuiElement {
 	private JLabel amountLabel;
 	private JTextField textValueField;
 
-	public ValueField(JTextField field, String labelDiscription, String defautlText) {
+	
+	public ValueField(JTextField field, String labelDiscription) {
 		this.amountLabel = new JLabel(labelDiscription);
 		this.textValueField = field;
 	}
 
 	public void initLayout() {
+		textValueField.setText("");
 		setLayout(new GridLayout(2, 0));
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		amountLabel.setLabelFor(textValueField);

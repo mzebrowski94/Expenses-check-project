@@ -18,12 +18,15 @@ public class AppControllerFactory {
 		CenterPanel centerPanel = mainWindow.getCenterPanel();
 		RightPanel rightPanel = mainWindow.getRightPanel();
 
-		appController = new AppController(new CenterPanelController(serviceManager, centerPanel),
+		appController = new AppController(
+				new CenterPanelController(serviceManager, centerPanel),
 				new MenuToolBarController(serviceManager, mainWindow.getMenuToolBar()),
 				new RightPanelController(serviceManager, rightPanel,
 						new UserLoginPanelController(serviceManager, rightPanel.getUserAvatarPanel()),
 						new UserInformationPanelController(serviceManager, rightPanel.getUserInformationPanel()),
 						new ExpenseAddPanelController(serviceManager, rightPanel.getAddExpensePanel())));
+		
+		
 		return appController;
 	}
 }

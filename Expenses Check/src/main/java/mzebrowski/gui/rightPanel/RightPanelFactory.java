@@ -18,13 +18,13 @@ import mzebrowski.gui.rightPanel.userInformationPanel.UserInformationPanel;
 import mzebrowski.gui.rightPanel.userLoginPanel.UserLoginPanel;
 
 public class RightPanelFactory {
-		
+
 		public RightPanel build()
 		{
 			RightPanel rightPanel = new RightPanel(
 						new UserLoginPanel(
-								new ValueField(new JTextField(),"User name: ","0"),
-								new ValueField(new JPasswordField(),"Password: ","0"),
+								new ValueField(new JTextField(),"User name: "),
+								new ValueField(new JPasswordField(),"Password: "),
 								new ImageIcon("src/main/resources/images/avatar.png"),
 								new JButton("Login"),
 								new JButton("Logout")
@@ -38,14 +38,19 @@ public class RightPanelFactory {
 								 new ComboBoxFilter<User>("User: "),
 								 new ComboBoxFilter<E_PurchaseType>("Purchase type: "),
 								 new ComboBoxFilter<LocalDate>("Date: "),
-								 new ValueField(new JFormattedTextField(NumberFormat.getNumberInstance()),"Amount: ","0"),
+								 new ValueField(new JFormattedTextField(getNumberFormat()),"Amount: "),
 								 new JButton("Add"),
-								 new ValueField(new JTextField(),"Discription:"," ")
+								 new ValueField(new JTextField(),"Discription:")
 								)
 					);
 		
 			return rightPanel;
 		}
 		
-		
+		private NumberFormat getNumberFormat()
+		{
+			NumberFormat numberFormat = NumberFormat.getNumberInstance();
+			numberFormat.setMaximumFractionDigits(2);
+			return numberFormat;
+		}
 }

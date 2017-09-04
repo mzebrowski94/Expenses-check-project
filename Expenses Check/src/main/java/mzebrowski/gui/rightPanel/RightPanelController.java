@@ -13,7 +13,7 @@ import mzebrowski.gui.rightPanel.expenseAddPanel.ExpenseAddPanelController;
 import mzebrowski.gui.rightPanel.userInformationPanel.UserInformationPanelController;
 import mzebrowski.gui.rightPanel.userLoginPanel.UserLoginPanelController;
 
-public class RightPanelController implements ActionListener, ControllerElement {
+public class RightPanelController implements ControllerElement {
 
 	ServiceManager serviceManager;
 	RightPanel rightPanel;
@@ -33,23 +33,20 @@ public class RightPanelController implements ActionListener, ControllerElement {
 	}
 
 	public void initListeners(ActionListener actionListener) {
-		userLoginPanelController.initListeners(this);
-		userInformationPanelController.initListeners(this);
-		expenseAddPanelController.initListeners(this);
+		userLoginPanelController.initListeners(actionListener);
+		userInformationPanelController.initListeners(actionListener);
+		expenseAddPanelController.initListeners(actionListener);
 	}
 
 	public void loadData() {
 		expenseAddPanelController.loadData();
 	}
 
-	public void actionPerformed(ActionEvent event) {
-		if (event.getActionCommand() == E_RightPanelActions.LOGIN.actionName()) {
-			proceedLogin();
-		}
-		else if(event.getActionCommand() == E_RightPanelActions.LOGOUT.actionName())
-		{
-			 proceedLogout();
-		}
+	public boolean addExpense() {
+		if(expenseAddPanelController.addExpenseToDB())
+			return true;
+		else
+			return false;
 	}
 
 	public void proceedLogin() {

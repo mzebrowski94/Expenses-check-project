@@ -38,4 +38,10 @@ public class CenterPanelController implements ControllerElement {
 	public void initListeners(ActionListener actionListener) {
 		// TODO Auto-generated method stub
 	}
+	
+	public void updateData()
+	{
+		recordTable.updateRecordTableData((ArrayList<Expense>) serviceManager.getAllExpenses());
+		raportPanel.updateData((ArrayList<String>) serviceManager.getUserExpensesRaport());
+	}
 }

@@ -18,6 +18,7 @@ import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.GuiElement;
 import mzebrowski.gui.centerPanel.ComboBoxFilter;
+import mzebrowski.gui.rightPanel.E_RightPanelActions;
 import mzebrowski.gui.rightPanel.ValueField;
 
 @SuppressWarnings("serial")
@@ -72,11 +73,23 @@ public class ExpenseAddPanel extends JPanel implements GuiElement {
 	}
 
 	public void initActionsAndListeners(ActionListener actionListener) {
+	
+		userFilter.setActionCommandForComboBox(E_RightPanelActions.OPTION_UPDATED.actionName());
 		this.userFilter.initActionsAndListeners(actionListener);
+		
+		purchaseTypeFilter.setActionCommandForComboBox(E_RightPanelActions.OPTION_UPDATED.actionName());
 		this.purchaseTypeFilter.initActionsAndListeners(actionListener);
+		
+		discriptionField.setActionCommandForTextValue(E_RightPanelActions.OPTION_UPDATED.actionName());
 		this.discriptionField.initActionsAndListeners(actionListener);
+		
+		dateFilter.setActionCommandForComboBox(E_RightPanelActions.OPTION_UPDATED.actionName());
 		this.dateFilter.initActionsAndListeners(actionListener);
+		
+		addButon.setActionCommand(E_RightPanelActions.ADD_EXPENSE.actionName());
 		this.addButon.addActionListener(actionListener);
+		
+		valueField.setActionCommandForTextValue(E_RightPanelActions.OPTION_UPDATED.actionName());
 		this.valueField.initActionsAndListeners(actionListener);	
 	}
 	

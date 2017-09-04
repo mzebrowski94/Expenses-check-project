@@ -31,7 +31,7 @@ public class RecordTable extends JTable implements GuiElement {
 		for (int i = 0; i < arrayList.size(); i++) {
 			Expense expense = arrayList.get(i);
 			data[i] = new Object[] { expense.getUserID().getUserName(), expense.getDate(), expense.getPurchaseType(),
-					expense.getName(), expense.getAmount() };
+					expense.getDiscription(), expense.getAmount() };
 		}
 
 		model.setDataVector(data, columnNames);
