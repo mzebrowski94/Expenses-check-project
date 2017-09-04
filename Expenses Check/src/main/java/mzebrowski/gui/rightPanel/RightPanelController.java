@@ -40,22 +40,34 @@ public class RightPanelController implements ControllerElement {
 
 	public void loadData() {
 		expenseAddPanelController.loadData();
+		userInformationPanelController.loadData();
 	}
 
 	public boolean addExpense() {
-		if(expenseAddPanelController.addExpenseToDB())
+		if (expenseAddPanelController.addExpenseToDB())
+		{
+			User user = userLoginPanelController.getLoggedUser();
+			userInformationPanelController.updateUserInfo(user);
 			return true;
+		}
+			
 		else
 			return false;
 	}
 
-	public void proceedLogin() {
-		if (userLoginPanelController.proceedLogin())
+	public boolean proceedLogin() {
+		if (userLoginPanelController.proceedLogin()) {
 			expenseAddPanelController.setAddingEnabled(true);
+			User user = userLoginPanelController.getLoggedUser();
+			userInformationPanelController.updateUserInfo(user);
+			return true;
+		} else
+			return false;
 	}
 
 	public void proceedLogout() {
 		userLoginPanelController.proceedLogout();
 		expenseAddPanelController.setAddingEnabled(false);
+		userInformationPanelController.updateUserInfo(null);
 	}
 }

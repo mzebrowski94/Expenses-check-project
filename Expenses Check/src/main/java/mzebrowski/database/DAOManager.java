@@ -24,7 +24,7 @@ public class DAOManager {
 	public DAOManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.entityManagerFactory = entityManager.getEntityManagerFactory();
-		//addSomeRandomDataFOR_PREVIEW_ONLY();
+		addSomeRandomDataFOR_PREVIEW_ONLY();
 	}
 
 	public GenericDAO getDAO(E_TableType tableType) throws SQLException {
@@ -82,7 +82,7 @@ public class DAOManager {
 		expense.setAmount(amount);
 		expense.setDate(new Date());
 		expense.setDiscription(discription);
-		expense.setUserID(user);
+		expense.setUser(user);
 		expense.setPurchaseType(purchaseType);
 		expense.setExpenseType(expenseType);
 		

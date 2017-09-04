@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
+import mzebrowski.database.domain.E_ExpenseType;
 import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.centerPanel.IconShape.IconType;
@@ -17,7 +18,7 @@ public class CenterPanelFactory {
 		CenterPanel centerPanel = new CenterPanel(
 				new ComboBoxesToolbar(
 						new ComboBoxFilter<User>("Check expenses for:"),
-						new ComboBoxFilter<E_Incomes>("Filter income:"),
+						new ComboBoxFilter<E_ExpenseType>("Expense type:"),
 						new ComboBoxFilter<E_PurchaseType>("Type:"),
 						new JButton(new IconShape(Color.GREEN,25,IconType.PLUS)),
 						new JButton(new IconShape(Color.RED,25,IconType.MINUS))

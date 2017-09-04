@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import mzebrowski.controller.ControllerElement;
+import mzebrowski.database.domain.E_ExpenseType;
 import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.expense.Expense;
 import mzebrowski.database.domain.user.User;
@@ -26,6 +27,7 @@ public class ExpenseAddPanelController implements ControllerElement {
 	ComboBoxFilter<LocalDate> dateFilter;
 	ComboBoxFilter<User> userFilter;
 	ComboBoxFilter<E_PurchaseType> purchaseTypeFilter;
+	ComboBoxFilter<E_ExpenseType> expenseTypeFilter;
 	ValueField valueField, discriptionField;
 	JButton addButon;
 
@@ -38,6 +40,7 @@ public class ExpenseAddPanelController implements ControllerElement {
 		this.valueField = addExpensePanel.getValueField();
 		this.discriptionField = addExpensePanel.getDiscriptionField();
 		this.addButon = addExpensePanel.getAddButon();
+		this.expenseTypeFilter = addExpensePanel.getExpenseTypeFilter();
 	}
 
 	public void initListeners(ActionListener actionListener) {
@@ -48,6 +51,7 @@ public class ExpenseAddPanelController implements ControllerElement {
 		dateFilter.setOptionListData(getLastWeekDays());
 		userFilter.setOptionListData((ArrayList<User>) serviceManager.getAllUsers());
 		purchaseTypeFilter.setOptionListData(new ArrayList<E_PurchaseType>(Arrays.asList(E_PurchaseType.values())));
+		expenseTypeFilter.setOptionListData(new ArrayList<E_ExpenseType>(Arrays.asList(E_ExpenseType.values())));
 	}
 
 	private ArrayList<LocalDate> getLastWeekDays() {
@@ -69,7 +73,7 @@ public class ExpenseAddPanelController implements ControllerElement {
 
 		Expense expense = createExpenseFromOptionList();
 		if (expense != null) {
-				serviceManager.addNewRecord(expense);
+			serviceManager.addNewRecord(expense);
 			return true;
 		} else
 			return false;
@@ -93,8 +97,9 @@ public class ExpenseAddPanelController implements ControllerElement {
 			expense.setAmount(amount);
 			expense.setDate(date);
 			expense.setDiscription(discription);
+			expense.setExpenseType((E_ExpenseType) expenseTypeFilter.getSelectedItem());
 			expense.setPurchaseType((E_PurchaseType) purchaseTypeFilter.getSelectedItem());
-			expense.setUserID((User) userFilter.getSelectedItem());
+			expense.setUser((User) userFilter.getSelectedItem());
 			System.out.println(expense.toString());
 			return expense;
 		} catch (IllegalArgumentException e) {

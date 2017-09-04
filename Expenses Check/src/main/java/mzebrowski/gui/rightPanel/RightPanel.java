@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import mzebrowski.gui.GuiElement;
@@ -42,8 +43,8 @@ public class RightPanel extends JPanel implements GuiElement {
 		userInformationPanel.initLayout();
 		addExpensePanel.initLayout();
 		
-		GridLayout layout = new GridLayout(3, 0);
-		setLayout(layout);
+		
+		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		add(userLoginPanel);
 		add(userInformationPanel);
 		add(addExpensePanel);

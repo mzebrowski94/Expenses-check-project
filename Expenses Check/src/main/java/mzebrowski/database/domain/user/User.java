@@ -44,7 +44,7 @@ public class User {
 	@Column(name = "last_update")
 	private java.util.Date lastUpdate;
 	
-	@OneToMany(mappedBy = "userID")
+	@OneToMany(mappedBy = "user")
 	private List<Expense> expenses;	
 	
 

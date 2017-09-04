@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import mzebrowski.gui.GuiElement;
 
@@ -53,7 +54,8 @@ public class CenterPanel extends JPanel implements GuiElement {
 		constraints.weightx = 0.8;
 		constraints.weighty = 0.8;
 
-		this.add(recordTable, constraints);
+		JScrollPane scrollPanel = new JScrollPane(recordTable);
+		this.add(scrollPanel, constraints);
 
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridx = 0;

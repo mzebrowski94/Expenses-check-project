@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import mzebrowski.database.domain.E_ExpenseType;
 import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.centerPanel.ComboBoxFilter;
@@ -38,6 +39,7 @@ public class RightPanelFactory {
 								 new ComboBoxFilter<User>("User: "),
 								 new ComboBoxFilter<E_PurchaseType>("Purchase type: "),
 								 new ComboBoxFilter<LocalDate>("Date: "),
+								 new ComboBoxFilter<E_ExpenseType>("Expense type: "),
 								 new ValueField(new JFormattedTextField(getNumberFormat()),"Amount: "),
 								 new JButton("Add"),
 								 new ValueField(new JTextField(),"Discription:")

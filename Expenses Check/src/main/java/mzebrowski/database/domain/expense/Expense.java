@@ -27,24 +27,24 @@ public class Expense {
 	@Column(name = "discription", length = 20)
 	private String discription;
 
-	@Column
+	@Column(nullable = false)
 	@Enumerated(EnumType.ORDINAL)
     private E_PurchaseType purchaseType;
 	
-	@Column
+	@Column(nullable = false)
 	@Enumerated(EnumType.ORDINAL)
     private E_ExpenseType expenseType;
 	
 	@Column(name = "amount", nullable = false, precision = 4, scale = 2)
 	private double amount;
 
-	@Column(name = "date")
+	@Column(name = "date", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private java.util.Date date;
 
 	@ManyToOne
-	@JoinColumn(name = "userID")
-	private User userID;
+	@JoinColumn(name = "user")
+	private User user;
 
 	public int getIdExpenses() {
 		return idExpenses;
@@ -58,8 +58,8 @@ public class Expense {
 		return discription;
 	}
 
-	public void setDiscription(String name) {
-		this.discription = name;
+	public void setDiscription(String discription) {
+		this.discription = discription;
 	}
 	
 	public E_PurchaseType getPurchaseType() {
@@ -86,12 +86,12 @@ public class Expense {
 		this.date = date;
 	}
 
-	public User getUserID() {
-		return userID;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserID(User userID) {
-		this.userID = userID;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public E_ExpenseType getExpenseType() {
@@ -105,6 +105,6 @@ public class Expense {
 	@Override
 	public String toString()
 	{
-		return "" + getAmount() + ", " + getDate() + ", " + getDiscription() + ", " + getPurchaseType() + ", " + getUserID().toString();  
+		return "" + getAmount() + ", " + getDate() + ", " + getDiscription() + ", " + getPurchaseType() + ", " + getUser().toString();  
 	}
 }

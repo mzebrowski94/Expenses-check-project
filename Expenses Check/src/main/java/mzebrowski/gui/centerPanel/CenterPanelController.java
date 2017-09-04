@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import mzebrowski.controller.ControllerElement;
+import mzebrowski.database.domain.E_ExpenseType;
 import mzebrowski.database.domain.expense.Expense;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.database.services.ServiceManager;
@@ -28,7 +29,7 @@ public class CenterPanelController implements ControllerElement {
 	public void loadData() {
 		comboBoxesToolbar.loadData((ArrayList<User>) serviceManager.getAllUsers());	
 		recordTable.updateRecordTableData((ArrayList<Expense>) serviceManager.getAllExpenses());
-		raportPanel.updateData((ArrayList<String>) serviceManager.getUserExpensesRaport());
+		raportPanel.updateData((ArrayList<String>) serviceManager.getUsersExpensesRaportThisMonth(E_ExpenseType.GROUP));
 	}
 
 	public void initListeners() {
@@ -42,6 +43,6 @@ public class CenterPanelController implements ControllerElement {
 	public void updateData()
 	{
 		recordTable.updateRecordTableData((ArrayList<Expense>) serviceManager.getAllExpenses());
-		raportPanel.updateData((ArrayList<String>) serviceManager.getUserExpensesRaport());
+		raportPanel.updateData((ArrayList<String>) serviceManager.getUsersExpensesRaportThisMonth(E_ExpenseType.GROUP));
 	}
 }
