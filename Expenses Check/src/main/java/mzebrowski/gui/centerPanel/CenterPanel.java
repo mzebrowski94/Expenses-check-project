@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import mzebrowski.gui.GuiElement;
+import mzebrowski.gui.centerPanel.filterToolbar.ComboBoxesToolbar;
+import mzebrowski.gui.centerPanel.raportPanel.RaportPanel;
+import mzebrowski.gui.centerPanel.recordTable.RecordTable;
 
 @SuppressWarnings("serial")
 public class CenterPanel extends JPanel implements GuiElement {
@@ -30,7 +33,7 @@ public class CenterPanel extends JPanel implements GuiElement {
 		return recordTable;
 	}
 
-	public RaportPanel getStatusbar() {
+	public RaportPanel getRaportPanel() {
 		return raportPanel;
 	}
 
@@ -51,17 +54,20 @@ public class CenterPanel extends JPanel implements GuiElement {
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridx = 0;
 		constraints.gridy = 1;
-		constraints.weightx = 0.8;
-		constraints.weighty = 0.8;
+		constraints.weightx = 0.9;
+		constraints.weighty = 0.9;
 
-		JScrollPane scrollPanel = new JScrollPane(recordTable);
+		JScrollPane scrollPanel = new JScrollPane();
 		this.add(scrollPanel, constraints);
-
+		recordTable.setPreferredScrollableViewportSize(recordTable.getPreferredSize());
+		recordTable.setFillsViewportHeight(true);
+		scrollPanel.setViewportView(recordTable);
+		
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.gridx = 0;
 		constraints.gridy = 2;
-		constraints.weightx = 0.2;
-		constraints.weighty = 0.2;
+		constraints.weightx = 0.1;
+		constraints.weighty = 0.1;
 
 		this.add(raportPanel, constraints);
 	}

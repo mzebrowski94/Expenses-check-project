@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import mzebrowski.database.DAOs.ExpenseDAO;
 import mzebrowski.database.DAOs.GenericDAO;
@@ -20,20 +21,22 @@ public class DAOManager {
 
 	private EntityManager entityManager;
 	private EntityManagerFactory entityManagerFactory;
-
+	private CriteriaBuilder criteriaBuilder;
+	
 	public DAOManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.entityManagerFactory = entityManager.getEntityManagerFactory();
-		addSomeRandomDataFOR_PREVIEW_ONLY();
+		this.criteriaBuilder = entityManagerFactory.getCriteriaBuilder();
+		//addSomeRandomDataFOR_PREVIEW_ONLY();
 	}
 
 	public GenericDAO getDAO(E_TableType tableType) throws SQLException {
 
 		switch (tableType) {
 		case EXPENSE:
-			return new ExpenseDAO(entityManager, E_TableType.EXPENSE);
+			return new ExpenseDAO(entityManager,criteriaBuilder, E_TableType.EXPENSE);
 		case USER:
-			return new UserDAO(entityManager, E_TableType.USER);
+			return new UserDAO(entityManager,criteriaBuilder, E_TableType.USER);
 		default:
 			throw new SQLException("Trying to link to an unexistant table.");
 		}

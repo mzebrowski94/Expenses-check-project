@@ -8,7 +8,8 @@ import javax.swing.JOptionPane;
 import mzebrowski.controller.ControllerElement;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.database.services.ServiceManager;
-import mzebrowski.gui.rightPanel.ValueField;
+import mzebrowski.gui.additionalComponents.ValueField;
+import mzebrowski.gui.rightPanel.E_RightPanelActions;
 
 public class UserLoginPanelController implements ControllerElement {
 
@@ -29,7 +30,17 @@ public class UserLoginPanelController implements ControllerElement {
 	}
 
 	public void initListeners(ActionListener actionListener) {
-		userLoginPanel.initActionsAndListeners(actionListener);
+		loginButton.setActionCommand(E_RightPanelActions.LOGIN.name());
+		this.loginButton.addActionListener(actionListener);
+		
+		logoutButton.setActionCommand(E_RightPanelActions.LOGOUT.name());
+		this.logoutButton.addActionListener(actionListener);
+
+		loginField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
+		this.loginField.initActionsAndListeners(actionListener);
+
+		passwordField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
+		this.passwordField.initActionsAndListeners(actionListener);
 	}
 
 	public boolean proceedLogin() {
@@ -75,7 +86,7 @@ public class UserLoginPanelController implements ControllerElement {
 	public void loadData() {
 		// TODO Auto-generated method stub
 	}
-
+	
 	public User getLoggedUser() {
 		return loggedUser;
 	}

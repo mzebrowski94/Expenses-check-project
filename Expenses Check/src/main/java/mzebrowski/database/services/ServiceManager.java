@@ -1,6 +1,7 @@
 package mzebrowski.database.services;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,9 +12,11 @@ import mzebrowski.database.DAOManager;
 import mzebrowski.database.DAOs.ExpenseDAO;
 import mzebrowski.database.DAOs.UserDAO;
 import mzebrowski.database.domain.E_ExpenseType;
+import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.E_TableType;
 import mzebrowski.database.domain.expense.Expense;
 import mzebrowski.database.domain.user.User;
+import mzebrowski.database.domain.wrappers.UserSumExpensesWrapper;
 
 public class ServiceManager {
 
@@ -40,12 +43,15 @@ public class ServiceManager {
 		return expenseDAO.getAll();
 	}
 
-	public List<String> getUsersExpensesRaportThisMonth(E_ExpenseType expenseType) {
-		LocalDate dateWeekEalier = LocalDate.now().minusWeeks(1);
-		Date date = java.sql.Date.valueOf(dateWeekEalier);
-		return expenseDAO.getAllUsersExpensesRaportToDate(date, expenseType);
+	public List<UserSumExpensesWrapper> getUsersExpensesRaportBetween(E_ExpenseType expenseType, LocalDate startDate, LocalDate endDate) {
+		return expenseDAO.getAllUsersSumExpensesBetween(expenseType,toUtilDate(startDate),toUtilDate(endDate));
 	}
 
+	public Date toUtilDate(LocalDate localDate)
+	{
+		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	}
+	
 	public User proceedUserLogin(String userName, String password) {
 		User user = userDAO.getUser(userName);
 		if (user != null && user.getPassword().equals(password))
@@ -63,27 +69,40 @@ public class ServiceManager {
 	}
 
 	public String getExpenseRaportForUser(User user, E_ExpenseType expenseType) {
-		Double userExpenses = expenseDAO.getUserExpensesAmount(user, expenseType);
-		Double allUsersExpenses = expenseDAO.getAllUsersExpensesAmount(expenseType);
-		if (userExpenses != null && allUsersExpenses != null) {
-			Integer percent = (int) ((userExpenses / allUsersExpenses) * 100);
-			return userExpenses.toString() + " which is " + percent.toString() + "%" + "of all.";
-		} else {
-			return null;
-		}
 
+		Double userExpensesSum = expenseDAO.getUserExpensesSum(user, expenseType);
+		Integer percent;
+		String endLine;
+
+		if (expenseType == E_ExpenseType.OWN) {
+			Double userGroupExpensesSum = expenseDAO.getUserExpensesSum(user, E_ExpenseType.GROUP);
+			if (userExpensesSum != null && userGroupExpensesSum != null) {
+				Double allUserExpensesSum = userExpensesSum + userGroupExpensesSum;
+				percent = (int) ((userExpensesSum / allUserExpensesSum) * 100);
+				endLine = "% of your expenses.";
+			} else {
+				return null;
+			}
+		} else {
+			Double allUsersExpenses = expenseDAO.getAllUsersExpensesSum(expenseType);
+			if (userExpensesSum != null && allUsersExpenses != null) {
+				percent = (int) ((userExpensesSum / allUsersExpenses) * 100);
+				endLine = "% of group expenses.";
+			} else {
+				return null;
+			}
+		}
+		return userExpensesSum.toString() + " (" + percent.toString() + endLine + ")";
 	}
 
-	// List<Object> objectList;
-	// List<Double> amountList = new ArrayList<Double>();
-	// objectList = expenseDAO.getValueWithID(1,
-	// E_ExpenseTableAttributes.AMOUNT.getAttributeName());
-	// for(Object obj : objectList)
-	// {
-	// if(obj instanceof Double)
-	// amountList.add((Double) obj);
-	// }
-	//
-	// return null;
+	public ArrayList<Expense> getExpensesFiltered(User userFilter, E_ExpenseType expenseTypeFilter,
+			E_PurchaseType purchaseTypeFilter) {
+		return (ArrayList<Expense>) expenseDAO.getExpensesFiltered(userFilter, expenseTypeFilter, purchaseTypeFilter);
+	}
+
+	public Double getAverageUsersExpensesBetween(E_ExpenseType expenseType, LocalDate startDate, LocalDate endDate) {
+		return expenseDAO.getAvarageUsersExpensesBetween(expenseType, toUtilDate(startDate),toUtilDate(endDate));
+		
+	}
 
 }

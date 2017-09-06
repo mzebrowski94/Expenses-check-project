@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import mzebrowski.database.domain.E_TableType;
 
@@ -16,8 +17,9 @@ public abstract class GenericDAO<T> {
 	//Protected
     protected final String tableName;
     EntityManager entityManager;
+    CriteriaBuilder criteriaBuilder;
     
-    protected GenericDAO(EntityManager entityManager, E_TableType tableType) {
+    protected GenericDAO(EntityManager entityManager,CriteriaBuilder criteriaBuilder, E_TableType tableType) {
         this.tableName = tableType.toString();
         this.entityManager = entityManager;
     }

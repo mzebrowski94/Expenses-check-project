@@ -9,7 +9,12 @@ import javax.swing.JTextPane;
 import mzebrowski.database.domain.E_ExpenseType;
 import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
-import mzebrowski.gui.centerPanel.IconShape.IconType;
+import mzebrowski.gui.additionalComponents.ComboBoxFilter;
+import mzebrowski.gui.additionalComponents.IconShape;
+import mzebrowski.gui.additionalComponents.IconShape.IconType;
+import mzebrowski.gui.centerPanel.filterToolbar.ComboBoxesToolbar;
+import mzebrowski.gui.centerPanel.raportPanel.RaportPanel;
+import mzebrowski.gui.centerPanel.recordTable.RecordTable;
 
 public class CenterPanelFactory {
 	
@@ -17,15 +22,14 @@ public class CenterPanelFactory {
 	{
 		CenterPanel centerPanel = new CenterPanel(
 				new ComboBoxesToolbar(
-						new ComboBoxFilter<User>("Check expenses for:"),
-						new ComboBoxFilter<E_ExpenseType>("Expense type:"),
-						new ComboBoxFilter<E_PurchaseType>("Type:"),
+						new ComboBoxFilter<User>("Check expenses for:", ComboBoxFilter.ADD_ALL_OPTION),
+						new ComboBoxFilter<E_ExpenseType>("Expense type:", ComboBoxFilter.ADD_ALL_OPTION),
+						new ComboBoxFilter<E_PurchaseType>("Type:", ComboBoxFilter.ADD_ALL_OPTION),
 						new JButton(new IconShape(Color.GREEN,25,IconType.PLUS)),
 						new JButton(new IconShape(Color.RED,25,IconType.MINUS))
 						),
-				new RecordTable(
-						new Dimension(500, 500)),
-				new RaportPanel(new JTextPane(), new JLabel("Status: Online "))
+				new RecordTable(),
+				new RaportPanel(new JLabel("Status: Online "))
 				);
 		return centerPanel;
 	}	

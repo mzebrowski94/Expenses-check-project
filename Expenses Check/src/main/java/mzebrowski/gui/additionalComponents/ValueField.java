@@ -1,4 +1,4 @@
-package mzebrowski.gui.rightPanel;
+package mzebrowski.gui.additionalComponents;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -32,6 +32,13 @@ public class ValueField extends JPanel implements GuiElement {
 		add(textValueField);
 	}
 
+	@Override
+	public void setEnabled(boolean enabled)
+	{
+		//amountLabel.setEnabled(enabled);
+		textValueField.setEnabled(enabled);
+	}
+	
 	public void initActionsAndListeners(ActionListener actionListener) {
 		textValueField.addActionListener(actionListener);
 	}

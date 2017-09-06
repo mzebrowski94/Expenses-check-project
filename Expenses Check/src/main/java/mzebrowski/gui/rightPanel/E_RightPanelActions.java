@@ -3,7 +3,7 @@ package mzebrowski.gui.rightPanel;
 import mzebrowski.controller.Actions;
 
 public enum E_RightPanelActions implements Actions {
-	LOGIN, LOGOUT, OPTION_UPDATED, ADD_EXPENSE;
+	LOGIN, LOGOUT, ADD_EXPENSE, FILTER_CHANGED, REFRESH_DATA, DELETE_RECORD;
 	
 	public String actionName()
 	{

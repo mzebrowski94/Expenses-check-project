@@ -1,20 +1,19 @@
 package mzebrowski.gui.centerPanel;
 
 public enum E_Incomes {
-	INCOME ("Incomes"), EXPENSE ("Expenses");
-	
-	private final String name;       
+	INCOME("Incomes"), EXPENSE("Expenses");
 
-    private E_Incomes(String s) {
-        name = s;
-    }
+	private final String name;
 
-    public boolean equalsName(String otherName) {
-        return name.equals(otherName);
-    }
+	private E_Incomes(String s) {
+		name = s;
+	}
 
-    public String toString() {
-       return this.name;
-    }
-	
+	public String toString() {
+		return this.name;
+	}
+
+	public boolean equalsName(String otherName) {
+		return name.equals(otherName);
+	}
 }

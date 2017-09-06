@@ -16,17 +16,15 @@ import mzebrowski.gui.rightPanel.userLoginPanel.UserLoginPanelController;
 public class RightPanelController implements ControllerElement {
 
 	ServiceManager serviceManager;
-	RightPanel rightPanel;
 	UserLoginPanelController userLoginPanelController;
 	UserInformationPanelController userInformationPanelController;
 	ExpenseAddPanelController expenseAddPanelController;
 
-	public RightPanelController(ServiceManager serviceManager, RightPanel rightPanel,
+	public RightPanelController(ServiceManager serviceManager,
 			UserLoginPanelController userLoginPanelController,
 			UserInformationPanelController userInformationPanelController,
 			ExpenseAddPanelController expenseAddPanelController) {
 		this.serviceManager = serviceManager;
-		this.rightPanel = rightPanel;
 		this.userLoginPanelController = userLoginPanelController;
 		this.userInformationPanelController = userInformationPanelController;
 		this.expenseAddPanelController = expenseAddPanelController;

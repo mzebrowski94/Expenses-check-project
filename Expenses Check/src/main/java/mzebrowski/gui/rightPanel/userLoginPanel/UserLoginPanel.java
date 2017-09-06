@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
 import mzebrowski.gui.GuiElement;
+import mzebrowski.gui.additionalComponents.ValueField;
 import mzebrowski.gui.rightPanel.E_RightPanelActions;
-import mzebrowski.gui.rightPanel.ValueField;
 
 @SuppressWarnings("serial")
 public class UserLoginPanel extends JPanel implements GuiElement {
@@ -73,20 +73,6 @@ public class UserLoginPanel extends JPanel implements GuiElement {
 				
 		logoutButton.setEnabled(false);
 		loginButton.setEnabled(true);
-	}
-
-	public void initActionsAndListeners(ActionListener actionListener) {
-		loginButton.setActionCommand(E_RightPanelActions.LOGIN.name());
-		this.loginButton.addActionListener(actionListener);
-		
-		logoutButton.setActionCommand(E_RightPanelActions.LOGOUT.name());
-		this.logoutButton.addActionListener(actionListener);
-
-		loginField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
-		this.loginField.initActionsAndListeners(actionListener);
-
-		passwordField.setActionCommandForTextValue(E_RightPanelActions.LOGIN.name());
-		this.passwordField.initActionsAndListeners(actionListener);
 	}
 
 	public ValueField getLoginField() {

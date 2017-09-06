@@ -47,10 +47,6 @@ public class UserInformationPanel extends JPanel implements GuiElement {
 		constraints.weighty = weighty;
 		return constraints;
 	}
-	
-	public void initActionsAndListeners(ActionListener actionListener) {
-		
-	}
 
 	public JLabel getOwnExpenses() {
 		return ownExpenses;

@@ -13,8 +13,9 @@ public class AppController implements ControllerElement, ActionListener {
 	MenuToolBarController menuToolBarController;
 	CenterPanelController centerPanelController;
 	RightPanelController rightPanelController;
-	
-	public AppController(CenterPanelController centerPanelController, MenuToolBarController menuToolBarController, RightPanelController rightPanellController) {
+
+	public AppController(CenterPanelController centerPanelController, MenuToolBarController menuToolBarController,
+			RightPanelController rightPanellController) {
 		this.centerPanelController = centerPanelController;
 		this.menuToolBarController = menuToolBarController;
 		this.rightPanelController = rightPanellController;
@@ -36,8 +37,11 @@ public class AppController implements ControllerElement, ActionListener {
 		} else if (event.getActionCommand() == E_RightPanelActions.LOGOUT.actionName()) {
 			rightPanelController.proceedLogout();
 		} else if (event.getActionCommand() == E_RightPanelActions.ADD_EXPENSE.actionName()) {
-			if(rightPanelController.addExpense())
-				centerPanelController.updateData();
-		}	
+			if (rightPanelController.addExpense())
+				centerPanelController.updateRaport();
+		} else if (event.getActionCommand() == E_RightPanelActions.FILTER_CHANGED.actionName()) {
+			centerPanelController.updateRaport();
+			centerPanelController.updateRecordTable();
+		}
 	}
 }

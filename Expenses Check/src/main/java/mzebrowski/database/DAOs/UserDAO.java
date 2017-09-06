@@ -6,14 +6,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import mzebrowski.database.domain.E_TableType;
 import mzebrowski.database.domain.user.User;
 
 public class UserDAO extends GenericDAO<User> {
 
-	public UserDAO(EntityManager entityManager, E_TableType tableType) {
-		super(entityManager, tableType);
+	public UserDAO(EntityManager entityManager,CriteriaBuilder criteriaBuilder, E_TableType tableType) {
+		super(entityManager,criteriaBuilder, tableType);
 	}
 
 	@Override

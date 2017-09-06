@@ -17,8 +17,9 @@ import mzebrowski.database.domain.E_PurchaseType;
 import mzebrowski.database.domain.expense.Expense;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.database.services.ServiceManager;
-import mzebrowski.gui.centerPanel.ComboBoxFilter;
-import mzebrowski.gui.rightPanel.ValueField;
+import mzebrowski.gui.additionalComponents.ComboBoxFilter;
+import mzebrowski.gui.additionalComponents.ValueField;
+import mzebrowski.gui.rightPanel.E_RightPanelActions;
 
 public class ExpenseAddPanelController implements ControllerElement {
 
@@ -44,7 +45,8 @@ public class ExpenseAddPanelController implements ControllerElement {
 	}
 
 	public void initListeners(ActionListener actionListener) {
-		addExpensePanel.initActionsAndListeners(actionListener);
+		addButon.setActionCommand(E_RightPanelActions.ADD_EXPENSE.actionName());
+		this.addButon.addActionListener(actionListener);
 	}
 
 	public void loadData() {
@@ -56,7 +58,7 @@ public class ExpenseAddPanelController implements ControllerElement {
 
 	private ArrayList<LocalDate> getLastWeekDays() {
 		LocalDate start = LocalDate.now();
-		LocalDate end = LocalDate.now().minusWeeks(1);
+		LocalDate end = LocalDate.now().minusWeeks(2);
 		ArrayList<LocalDate> totalDates = new ArrayList<LocalDate>();
 		while (start.isAfter(end)) {
 			totalDates.add(start);
@@ -80,7 +82,7 @@ public class ExpenseAddPanelController implements ControllerElement {
 
 	}
 
-	private Expense createExpenseFromOptionList() throws IllegalArgumentException {
+	private Expense createExpenseFromOptionList() {
 		try {
 			Expense expense = new Expense();
 
@@ -88,12 +90,14 @@ public class ExpenseAddPanelController implements ControllerElement {
 			double amount = Double.parseDouble(amountText);
 
 			LocalDate localdate = (LocalDate) dateFilter.getSelectedItem();
-			Date date = Date.from(localdate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+			Date date = serviceManager.toUtilDate(localdate);
+					
 			String discription = discriptionField.getInsertedText();
 			if (discription.equals(""))
 				discription = "No discription";
-
+			else if(discription.length() > 20)
+				throw new IllegalArgumentException();
+			
 			expense.setAmount(amount);
 			expense.setDate(date);
 			expense.setDiscription(discription);
@@ -104,7 +108,7 @@ public class ExpenseAddPanelController implements ControllerElement {
 			return expense;
 		} catch (IllegalArgumentException e) {
 			JOptionPane.showMessageDialog(null, "Incorrect number or discription.\nTry again.",
-					"Incorrect number or discription.", JOptionPane.ERROR_MESSAGE);
+					"Incorrect number or to long discription.", JOptionPane.ERROR_MESSAGE);
 			return null;
 		}
 	}

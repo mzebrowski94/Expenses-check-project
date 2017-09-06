@@ -1,4 +1,4 @@
-package mzebrowski.gui.centerPanel;
+package mzebrowski.gui.additionalComponents;
 
 import java.awt.Color;
 import java.awt.Component;
