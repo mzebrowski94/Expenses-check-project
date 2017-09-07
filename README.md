@@ -10,6 +10,7 @@ Expenses Check is a software designed to monitor, update and organize expenses, 
 - Hibernate (JPQL, H2 datebase, MySQL datebase)
 - JFC (Swing)
 - Maven
+- Design patterns MVC
 
 **Use instruction:**
 
@@ -18,6 +19,8 @@ If there is no connection to the server, the application connects to the interna
 
 **Preview: [Work in progress..]**
 
-![Preview image:](https://preview.ibb.co/hbE4Mv/preview.png)
+![Preview image:](https://preview.ibb.co/ioD2Da/prev1.png)
+
+![Preview image:](https://preview.ibb.co/bD0XDa/prev2.png)
 
 
