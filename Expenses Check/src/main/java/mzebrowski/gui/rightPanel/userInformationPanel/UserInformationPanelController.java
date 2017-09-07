@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import mzebrowski.controller.ControllerElement;
-import mzebrowski.database.domain.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.database.services.ServiceManager;
 

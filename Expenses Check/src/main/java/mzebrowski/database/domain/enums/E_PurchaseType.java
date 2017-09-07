@@ -1,7 +1,7 @@
-package mzebrowski.database.domain;
+package mzebrowski.database.domain.enums;
 
 public enum E_PurchaseType {
-	SHOPPING("Shopping"), BILLS("Bills"), TICKET("Ticket"), OTHER("Other");
+	SHOPPING("Shopping"), FOOD("Food"), BILLS("Bills"), TICKET("Ticket"), OTHER("Other");
 	
 	String name;
 	

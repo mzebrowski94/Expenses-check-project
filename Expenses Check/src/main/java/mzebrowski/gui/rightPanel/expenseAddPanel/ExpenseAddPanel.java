@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
-import mzebrowski.database.domain.E_ExpenseType;
-import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.GuiElement;
 import mzebrowski.gui.additionalComponents.ComboBoxFilter;

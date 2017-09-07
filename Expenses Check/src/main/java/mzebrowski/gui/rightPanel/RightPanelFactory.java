@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import mzebrowski.database.domain.E_ExpenseType;
-import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.additionalComponents.ComboBoxFilter;
 import mzebrowski.gui.additionalComponents.ValueField;

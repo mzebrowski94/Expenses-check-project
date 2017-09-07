@@ -9,8 +9,8 @@ import javax.swing.Icon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import mzebrowski.database.domain.E_ExpenseType;
-import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_PurchaseType;
 import mzebrowski.database.domain.expense.Expense;
 import mzebrowski.gui.GuiElement;
 

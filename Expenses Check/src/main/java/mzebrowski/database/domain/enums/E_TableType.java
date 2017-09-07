@@ -1,4 +1,4 @@
-package mzebrowski.database.domain;
+package mzebrowski.database.domain.enums;
 
 public enum E_TableType {
 	EXPENSE("Expense"), USER("User");

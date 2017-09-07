@@ -6,8 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
-import mzebrowski.database.domain.E_ExpenseType;
-import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.additionalComponents.ComboBoxFilter;
 import mzebrowski.gui.additionalComponents.IconShape;

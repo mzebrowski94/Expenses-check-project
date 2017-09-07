@@ -1,4 +1,4 @@
-package mzebrowski.database.domain;
+package mzebrowski.database.domain.enums;
 
 public enum E_ExpenseType {
 	OWN("Own"), GROUP("Group");

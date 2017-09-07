@@ -16,13 +16,13 @@ public class RaportPanel extends JPanel implements GuiElement {
 
 	JTextPane groupMonthRaport;
 	JTextPane groupAllTimeRaport;
-	JTextPane toAvarageRaport;
+	JTextPane purchaseTypeRaport;
 	JLabel connectionStatus;
 
 	public RaportPanel(JLabel connectionStatus) {
 		this.groupMonthRaport = new JTextPane();
 		this.groupAllTimeRaport = new JTextPane();
-		this.toAvarageRaport = new JTextPane();
+		this.purchaseTypeRaport = new JTextPane();
 		this.connectionStatus = connectionStatus;
 	}
 
@@ -41,8 +41,8 @@ public class RaportPanel extends JPanel implements GuiElement {
 		groupAllTimeRaport.setEditable(false);
 		raportPanel.add(new JScrollPane(groupAllTimeRaport));
 
-		toAvarageRaport.setEditable(false);
-		raportPanel.add(new JScrollPane(toAvarageRaport));
+		purchaseTypeRaport.setEditable(false);
+		raportPanel.add(new JScrollPane(purchaseTypeRaport));
 
 		add(raportPanel);
 		this.connectionStatus.setHorizontalAlignment(JLabel.LEFT);
@@ -61,8 +61,8 @@ public class RaportPanel extends JPanel implements GuiElement {
 		return groupAllTimeRaport;
 	}
 
-	public JTextPane getToAvarageRaport() {
-		return toAvarageRaport;
+	public JTextPane getPurchaseTypeRaport() {
+		return purchaseTypeRaport;
 	}
 
 	public JLabel getConnectionStatus() {

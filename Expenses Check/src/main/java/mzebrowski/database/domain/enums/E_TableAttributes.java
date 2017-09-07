@@ -1,4 +1,4 @@
-package mzebrowski.database.domain;
+package mzebrowski.database.domain.enums;
 
 public interface E_TableAttributes {
 

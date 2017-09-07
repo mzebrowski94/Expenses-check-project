@@ -7,7 +7,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 
-import mzebrowski.database.domain.E_TableType;
+import mzebrowski.database.domain.enums.E_TableType;
 
 public abstract class GenericDAO<T> {
 

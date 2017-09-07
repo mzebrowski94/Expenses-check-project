@@ -9,8 +9,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
-import mzebrowski.database.domain.E_ExpenseType;
-import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.gui.GuiElement;
 import mzebrowski.gui.additionalComponents.ComboBoxFilter;

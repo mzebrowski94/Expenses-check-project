@@ -8,9 +8,9 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 
-import mzebrowski.database.domain.E_ExpenseType;
-import mzebrowski.database.domain.E_PurchaseType;
-import mzebrowski.database.domain.E_TableType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_PurchaseType;
+import mzebrowski.database.domain.enums.E_TableType;
 import mzebrowski.database.domain.expense.Expense;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.database.domain.wrappers.UserSumExpensesWrapper;

@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import mzebrowski.controller.ControllerElement;
-import mzebrowski.database.domain.E_ExpenseType;
-import mzebrowski.database.domain.E_PurchaseType;
+import mzebrowski.database.domain.enums.E_ExpenseType;
+import mzebrowski.database.domain.enums.E_PurchaseType;
 import mzebrowski.database.domain.user.User;
 import mzebrowski.database.services.ServiceManager;
 import mzebrowski.gui.centerPanel.filterToolbar.ComboBoxesToolbarController;
