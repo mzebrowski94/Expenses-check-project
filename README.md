@@ -23,4 +23,5 @@ If there is no connection to the server, the application connects to the interna
 
 ![Preview image:](https://preview.ibb.co/bD0XDa/prev2.png)
 
+![Alt text](preview.png?raw=true "Title")
 
